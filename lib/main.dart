@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   //N/A
   //this is for checking fork sync
   // commit and push
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

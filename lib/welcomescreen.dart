@@ -17,7 +17,7 @@ class WelcomeScreen extends StatelessWidget {
         width: double.infinity,
         decoration: const BoxDecoration(
             color: 
-              Color.fromARGB(255, 103, 57, 229)
+              Color.fromARGB(255, 172, 15, 15)
           ),
         child: Column(children: [
         

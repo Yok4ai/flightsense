@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   //N/A
-  //this is for checking fork sync
+  //this is for checking fork sync Hi
   // commit and push
   @override
   Widget build(BuildContext context) {

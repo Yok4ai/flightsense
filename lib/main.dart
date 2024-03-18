@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   //N/A
-  //this is for checking fork sync
+  //this is for checking fork sync Hi
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

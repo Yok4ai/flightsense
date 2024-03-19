@@ -1,5 +1,5 @@
+import 'package:flightsense/splashscreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flightsense/welcomescreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
       ),
-      home: const WelcomeScreen(),
+      home: const splashscreen(),
     );
   }
 }

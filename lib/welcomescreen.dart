@@ -17,12 +17,12 @@ class WelcomeScreen extends StatelessWidget {
         width: double.infinity,
         decoration: const BoxDecoration(
             color: 
-              Color.fromARGB(255, 172, 15, 15)
+              Color.fromARGB(255, 108, 85, 255)
           ),
         child: Column(children: [
         
               Image(image: AssetImage('assets/images/planewhite.png')),
-              SizedBox(height: 10),
+              SizedBox(height: 5),
               Text('Welcome',
                   style: TextStyle(
                       fontSize: 40,

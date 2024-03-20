@@ -98,7 +98,7 @@ packages:
     source: hosted
     version: "5.10.0"
   firebase_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_core
       sha256: "67bf0d5fd78f12f51c6b54a72f6141314136a1a90e98b1b7c45e7fac883254ed"
@@ -217,7 +217,7 @@ packages:
     source: hosted
     version: "1.11.0"
   page_transition:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: page_transition
       sha256: dee976b1f23de9bbef5cd512fe567e9f6278caee11f5eaca9a2115c19dc49ef6

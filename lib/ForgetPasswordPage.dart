@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flightsense/loginscreen.dart';
-import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgetPasswordPage extends StatefulWidget {

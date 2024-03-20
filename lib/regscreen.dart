@@ -47,19 +47,19 @@ class _RegScreenState extends State<RegScreen> {
        if (e.code == 'email-already-in-use') {
           print('The email address is already in use by another account.');
           // Show a error dialogue.
-          _showErrorDialog('The email address is already in use by another account.');
+          _showErrorDialog("The email address is already in use by another account.");
         } else if(e.code=='weak-password'){
           print('__password is too short__'); // Print the error code for debugging
           // Handle other potential errors
-          _showErrorDialog('__password is too short__');
+          _showErrorDialog("__password is too short__");
         }else {
-          print(e.code); // Print the error code for debugging
+          print("Registration failed. Please try again."); // Print the error code for debugging
           // Handle other potential errors
-          _showErrorDialog('Registration failed. Please try again.');
+          _showErrorDialog("Registration failed. Please try again.");
         }
       }
     } else {
-        _showErrorDialog('Password did not matched');
+        _showErrorDialog("Password did not matched");
     }
   }
 

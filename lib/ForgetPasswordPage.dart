@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
-  const ForgetPasswordPage({Key? key}) : super(key: key);
+  const ForgetPasswordPage({super.key});
 
   @override
   State<ForgetPasswordPage> createState() => _ForgetPasswordPageState();
@@ -59,24 +59,24 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
               'Enter your Email & we will send you a password reset link',
               textAlign: TextAlign.center,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
               controller: _emailController,
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.only(),
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.deepPurple),
                   borderRadius: BorderRadius.horizontal(),
                 ),
@@ -86,11 +86,11 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           MaterialButton(
             onPressed: passwordReset,
-            child: Text('Reset Password'),
             color: Colors.deepPurple,
+            child: const Text('Reset Password'),
           )
         ],
       ),

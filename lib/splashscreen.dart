@@ -5,8 +5,9 @@ import 'package:flightsense/welcomescreen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class splashscreen extends StatelessWidget{
-  const splashscreen({Key? key}):super(key: key);
+  const splashscreen({super.key});
 
+  @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
         splash: Column(
@@ -16,7 +17,7 @@ class splashscreen extends StatelessWidget{
             const Text('Flight Sense', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),)
            ],
          ),
-        backgroundColor: Color.fromARGB(255, 108, 85, 255),
+        backgroundColor: const Color.fromARGB(255, 108, 85, 255),
         nextScreen: const WelcomeScreen(),
       splashIconSize: 700,
       duration: 3000,

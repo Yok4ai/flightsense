@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "341486861196",
+    "project_id": "flightsense-9ff33",
+    "storage_bucket": "flightsense-9ff33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341486861196:android:6908c67b06c88d918734a9",
+        "android_client_info": {
+          "package_name": "com.example.flightsense"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh29_6jbhDN25x9XgG_WeGCJ-7V0Xb4GA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

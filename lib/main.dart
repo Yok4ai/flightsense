@@ -1,25 +1,30 @@
-import 'package:flightsense/splashscreen.dart';
+import 'package:flightsense/firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart'; // Import Firebase core
+import 'firebase_options.dart'; // Import firebase_option.dart
+import 'splashscreen.dart'; // Import splashscreen.dart
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
-  //N/A
-  //this is for checking fork sync Hi
-  // commit and push
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-      ),
-      home: const splashscreen(),
+      theme: ThemeData(),
+      home: const splashscreen(), // Correct capitalization and instantiation
     );
   }
 }

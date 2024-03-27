@@ -1,7 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/UserProfilePage.dart';
-import 'package:flightsense/loginscreen.dart';
-import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key); // Add Key parameter
@@ -11,7 +10,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final user = FirebaseAuth.instance.currentUser!;
+  late User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUser();
+  }
+
+  Future<void> _fetchUser() async {
+    _user = FirebaseAuth.instance.currentUser;
+    setState(() {}); // Trigger a rebuild after fetching the user
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +30,12 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Signed In as: ${user.email!}'),
+            if (_user != null && _user!.email != null) // Add null check for email
+              Text('Signed In as: ${_user!.email}'), // Remove the null check for email here
             MaterialButton(
-              onPressed: () {
+              onPressed: () async {
                 // Sign out
-                FirebaseAuth.instance.signOut();
+                await FirebaseAuth.instance.signOut();
 
                 // Navigate to UserProfilePage with specified parameters
                 Navigator.pushReplacement(
@@ -34,9 +45,10 @@ class _HomePageState extends State<HomePage> {
                       profileImageUrl: 'assets/images/gojo.png',
                       name: 'Shuvo',
                       phoneNumber: '01866946299',
-                      email: 'shuvo.sss1906@gmail.com',
+                      // email: 'N/A',
                       instagramUsername: '__Shruv',
-                      dateOfBirth: '19/06/2000',
+                      dateOfBirth: '19/06/2000', 
+                      email: _user?.email ?? '',
                     ),
                   ),
                 );

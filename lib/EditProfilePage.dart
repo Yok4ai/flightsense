@@ -4,8 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EditProfilePage extends StatefulWidget {
   final String email;
+  final VoidCallback refreshPage;
 
-  EditProfilePage({required this.email});
+  EditProfilePage({required this.email, required this.refreshPage});
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -35,45 +36,41 @@ class _EditProfilePageState extends State<EditProfilePage> {
     super.dispose();
   }
 
-void _updateProfile() async {
-  try {
-    // Ensure all text fields have non-null values before proceeding
-    if (_nameController.text.isNotEmpty &&
-        _dobController.text.isNotEmpty &&
-        _phoneController.text.isNotEmpty &&
-        _instaController.text.isNotEmpty) {
-
-      // Update the user document matching the provided email
-      await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: widget.email)
-          .get()
-          .then((querySnapshot) {
-            if (querySnapshot.docs.isNotEmpty) {
-              // Update the first document found
-              querySnapshot.docs.first.reference.update({
-                'username': _nameController.text,
-                'dateOfBirth': _dobController.text,
-                'phoneNumber': _phoneController.text,
-                'insta': _instaController.text,
-              });
-              Navigator.pop(context);
-            } else {
-              print('User document does not exist for email: ${widget.email}');
-            }
-          });
-    } else {
-      print('One or more text fields are empty.');
+  void _updateProfile() async {
+    try {
+      // Ensure all text fields have non-null values before proceeding
+      if (_nameController.text.isNotEmpty &&
+          _dobController.text.isNotEmpty &&
+          _phoneController.text.isNotEmpty &&
+          _instaController.text.isNotEmpty) {
+        // Update the user document matching the provided email
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: widget.email)
+            .get()
+            .then((querySnapshot) {
+          if (querySnapshot.docs.isNotEmpty) {
+            // Update the first document found
+            querySnapshot.docs.first.reference.update({
+              'username': _nameController.text,
+              'dateOfBirth': _dobController.text,
+              'phoneNumber': _phoneController.text,
+              'insta': _instaController.text,
+            });
+            Navigator.pop(context);
+            widget.refreshPage();
+          } else {
+            print('User document does not exist for email: ${widget.email}');
+          }
+        });
+      } else {
+        print('One or more text fields are empty.');
+      }
+    } catch (error) {
+      // Handle error
+      print("Failed to update user profile: $error");
     }
-  } catch (error) {
-    // Handle error
-    print("Failed to update user profile: $error");
   }
-}
-
-
-
-
 
   @override
   Widget build(BuildContext context) {

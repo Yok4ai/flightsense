@@ -224,7 +224,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => EditProfilePage(email: _email)),
+                        builder: (context) => EditProfilePage(email: _email, refreshPage: _refreshPage,)),
                   );
                 },
                 child: Text('Edit Profile'),

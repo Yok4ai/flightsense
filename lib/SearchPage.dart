@@ -12,8 +12,7 @@ class SearchPage extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white, // Set background color to white
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(
-              255, 1, 66, 119), // Set app bar background color to blue
+          backgroundColor: Color.fromARGB(255, 11, 126, 220), // Set app bar background color to blue
           toolbarHeight: 170.0, // Adjust the height of the app bar
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -80,6 +80,7 @@ void _updateProfile() async {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profile'),
+        backgroundColor: Colors.blue, // Specify the desired color
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),

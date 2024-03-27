@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'EditProfilePage.dart';
@@ -25,12 +26,16 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   late String _email;
+  late String _username= '';
+  late String _instaname= '';
 
   @override
   void initState() {
     super.initState();
     _email = widget.email; // Initialize with the provided email
     _fetchUserEmail(); // Fetch the user's email
+    _fetchUsername(_email);
+    _fetchUserinsta(_email);
   }
 
   Future<void> _fetchUserEmail() async {
@@ -38,6 +43,54 @@ class _UserProfilePageState extends State<UserProfilePage> {
     if (user != null && user.email != null) {
       setState(() {
         _email = user.email!; // Update _email if the user's email is not null
+      });
+    }
+  }
+
+  Future<void> _fetchUsername(String email) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        var data = querySnapshot.docs.first.data() as Map<String, dynamic>;
+        setState(() {
+          _username = data['username'];
+        });
+      } else {
+        setState(() {
+          _username = 'User with email $email not found.';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _username = 'Error fetching username: $e';
+      });
+    }
+  }
+
+   Future<void> _fetchUserinsta(String email) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        var data = querySnapshot.docs.first.data() as Map<String, dynamic>;
+        setState(() {
+          _instaname = data['insta'];
+        });
+      } else {
+        setState(() {
+          _instaname = 'User with email $email not found.';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _instaname = 'Error fetching insta: $e';
       });
     }
   }
@@ -85,7 +138,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
               SizedBox(height: 24.0),
               Text(
-                widget.name,
+                _username,
                 style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16.0),
@@ -93,7 +146,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               SizedBox(height: 12.0),
               _buildUserInfoRow(Icons.phone, 'Phone Number:', widget.phoneNumber),
               SizedBox(height: 12.0),
-              _buildUserInfoRow(Icons.account_box_outlined, 'Instagram:', widget.instagramUsername),
+              _buildUserInfoRow(Icons.account_box_outlined, 'Instagram:', _instaname),
               SizedBox(height: 12.0),
               _buildUserInfoRow(Icons.email, 'Email:', _email),
               SizedBox(height: 20.0),
@@ -102,10 +155,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => EditProfilePage(
-                      name: widget.name,
+                      name: _username,
                       dateOfBirth: widget.dateOfBirth,
                       phoneNumber: widget.phoneNumber,
-                      instagramUsername: widget.instagramUsername,
+                      instagramUsername: _instaname,
                       email: _email,
                       onUpdateProfile: _updateUserProfile,
                     )),

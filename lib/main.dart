@@ -1,4 +1,3 @@
-import 'package:flightsense/ExtractUsername.dart';
 import 'package:flightsense/HomePage.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/firebase_options.dart';

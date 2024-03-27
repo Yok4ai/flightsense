@@ -28,6 +28,7 @@ class EditProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Profile'),
+        backgroundColor: Colors.blue, // Specify the desired color
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -9,7 +9,7 @@ class UserProfilePage extends StatefulWidget {
   final String dateOfBirth;
   final String phoneNumber;
   final String instagramUsername;
-  final String email; // Include email field in the constructor
+  final String email;
 
   UserProfilePage({
     required this.profileImageUrl,
@@ -26,14 +26,14 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   late String _email;
-  late String _username= '';
-  late String _instaname= '';
+  late String _username = '';
+  late String _instaname = '';
 
   @override
   void initState() {
     super.initState();
-    _email = widget.email; // Initialize with the provided email
-    _fetchUserEmail(); // Fetch the user's email
+    _email = widget.email;
+    _fetchUserEmail();
     _fetchUsername(_email);
     _fetchUserinsta(_email);
   }
@@ -42,7 +42,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null && user.email != null) {
       setState(() {
-        _email = user.email!; // Update _email if the user's email is not null
+        _email = user.email!;
       });
     }
   }
@@ -71,7 +71,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     }
   }
 
-   Future<void> _fetchUserinsta(String email) async {
+  Future<void> _fetchUserinsta(String email) async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('users')
@@ -110,7 +110,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     if (_email.isEmpty) {
-      // If email is empty, show a loading indicator or handle it accordingly
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -124,6 +123,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           'User Profile',
           style: TextStyle(fontSize: 24.0),
         ),
+        backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -176,18 +176,32 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget _buildUserInfoRow(IconData icon, String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 20.0),
-          SizedBox(width: 16.0),
           Text(
             label,
-            style: TextStyle(fontSize: 18.0),
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
-          SizedBox(width: 16.0),
-          Text(
-            value,
-            style: TextStyle(fontSize: 18.0),
+          SizedBox(height: 8.0),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            child: Row(
+              children: [
+                Icon(icon, size: 20.0),
+                SizedBox(width: 8.0),
+                Expanded(
+                  child: Text(
+                    value,
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

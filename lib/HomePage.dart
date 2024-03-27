@@ -75,6 +75,7 @@ class _HomePageState extends State<HomePage> {
           icon: const Icon(Icons.menu),
           onPressed: () => _scaffoldKey.currentState?.openDrawer(), // Open drawer on menu tap
         ),
+        backgroundColor: Colors.blue, // Specify the desired color
       ),
       drawer: Drawer(
         child: Material(

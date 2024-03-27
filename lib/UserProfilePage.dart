@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'EditProfilePage.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -25,17 +26,31 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+<<<<<<< HEAD
   late String _email;
   late String _username= '';
   late String _instaname= '';
+=======
+  late String _email = '';
+  late String _username = '';
+>>>>>>> 9c86de62d728e7b0ae3d2f350d7388ae53f2bbcb
 
   @override
   void initState() {
     super.initState();
     _email = widget.email; // Initialize with the provided email
+<<<<<<< HEAD
     _fetchUserEmail(); // Fetch the user's email
     _fetchUsername(_email);
     _fetchUserinsta(_email);
+=======
+    _fetchUserData(); // Fetch the user's data including username
+  }
+
+  Future<void> _fetchUserData() async {
+    await _fetchUserEmail(); // Fetch the user's email
+    await _fetchUsername(_email); // Fetch the user's username
+>>>>>>> 9c86de62d728e7b0ae3d2f350d7388ae53f2bbcb
   }
 
   Future<void> _fetchUserEmail() async {
@@ -71,6 +86,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     }
   }
 
+<<<<<<< HEAD
    Future<void> _fetchUserinsta(String email) async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -95,6 +111,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
     }
   }
 
+=======
+>>>>>>> 9c86de62d728e7b0ae3d2f350d7388ae53f2bbcb
   void _updateUserProfile({
     required String name,
     required String dateOfBirth,
@@ -109,8 +127,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_email.isEmpty) {
-      // If email is empty, show a loading indicator or handle it accordingly
+    if (_email.isEmpty || _username.isEmpty) {
+      // If email or username is empty, show a loading indicator or handle it accordingly
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(),

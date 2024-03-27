@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'EditProfilePage.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -24,13 +25,19 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  late String _email;
+  late String _email = '';
+  late String _username = '';
 
   @override
   void initState() {
     super.initState();
     _email = widget.email; // Initialize with the provided email
-    _fetchUserEmail(); // Fetch the user's email
+    _fetchUserData(); // Fetch the user's data including username
+  }
+
+  Future<void> _fetchUserData() async {
+    await _fetchUserEmail(); // Fetch the user's email
+    await _fetchUsername(_email); // Fetch the user's username
   }
 
   Future<void> _fetchUserEmail() async {
@@ -38,6 +45,30 @@ class _UserProfilePageState extends State<UserProfilePage> {
     if (user != null && user.email != null) {
       setState(() {
         _email = user.email!; // Update _email if the user's email is not null
+      });
+    }
+  }
+
+  Future<void> _fetchUsername(String email) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        var data = querySnapshot.docs.first.data() as Map<String, dynamic>;
+        setState(() {
+          _username = data['username'];
+        });
+      } else {
+        setState(() {
+          _username = 'User with email $email not found.';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _username = 'Error fetching username: $e';
       });
     }
   }
@@ -56,8 +87,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_email.isEmpty) {
-      // If email is empty, show a loading indicator or handle it accordingly
+    if (_email.isEmpty || _username.isEmpty) {
+      // If email or username is empty, show a loading indicator or handle it accordingly
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -85,7 +116,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
               SizedBox(height: 24.0),
               Text(
-                widget.name,
+                _username,
                 style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16.0),

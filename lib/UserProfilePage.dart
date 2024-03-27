@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'EditProfilePage.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -7,7 +8,7 @@ class UserProfilePage extends StatefulWidget {
   final String dateOfBirth;
   final String phoneNumber;
   final String instagramUsername;
-  final String email;
+  final String email; // Include email field in the constructor
 
   UserProfilePage({
     required this.profileImageUrl,
@@ -23,20 +24,22 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  String _name = '';
-  String _dateOfBirth = '';
-  String _phoneNumber = '';
-  String _instagramUsername = '';
-  String _email = '';
+  late String _email;
 
   @override
   void initState() {
     super.initState();
-    _name = widget.name;
-    _dateOfBirth = widget.dateOfBirth;
-    _phoneNumber = widget.phoneNumber;
-    _instagramUsername = widget.instagramUsername;
-    _email = widget.email;
+    _email = widget.email; // Initialize with the provided email
+    _fetchUserEmail(); // Fetch the user's email
+  }
+
+  Future<void> _fetchUserEmail() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null && user.email != null) {
+      setState(() {
+        _email = user.email!; // Update _email if the user's email is not null
+      });
+    }
   }
 
   void _updateUserProfile({
@@ -47,16 +50,21 @@ class _UserProfilePageState extends State<UserProfilePage> {
     required String email,
   }) {
     setState(() {
-      _name = name;
-      _dateOfBirth = dateOfBirth;
-      _phoneNumber = phoneNumber;
-      _instagramUsername = instagramUsername;
-      _email = email;
+      // Update the state variables
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_email.isEmpty) {
+      // If email is empty, show a loading indicator or handle it accordingly
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -77,15 +85,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
               ),
               SizedBox(height: 24.0),
               Text(
-                _name,
+                widget.name,
                 style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16.0),
-              _buildUserInfoRow(Icons.cake, 'Date of Birth:', _dateOfBirth),
+              _buildUserInfoRow(Icons.cake, 'Date of Birth:', widget.dateOfBirth),
               SizedBox(height: 12.0),
-              _buildUserInfoRow(Icons.phone, 'Phone Number:', _phoneNumber),
+              _buildUserInfoRow(Icons.phone, 'Phone Number:', widget.phoneNumber),
               SizedBox(height: 12.0),
-              _buildUserInfoRow(Icons.account_box_outlined, 'Instagram:', _instagramUsername),
+              _buildUserInfoRow(Icons.account_box_outlined, 'Instagram:', widget.instagramUsername),
               SizedBox(height: 12.0),
               _buildUserInfoRow(Icons.email, 'Email:', _email),
               SizedBox(height: 20.0),
@@ -94,10 +102,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => EditProfilePage(
-                      name: _name,
-                      dateOfBirth: _dateOfBirth,
-                      phoneNumber: _phoneNumber,
-                      instagramUsername: _instagramUsername,
+                      name: widget.name,
+                      dateOfBirth: widget.dateOfBirth,
+                      phoneNumber: widget.phoneNumber,
+                      instagramUsername: widget.instagramUsername,
                       email: _email,
                       onUpdateProfile: _updateUserProfile,
                     )),

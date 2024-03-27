@@ -1,3 +1,4 @@
+import 'package:flightsense/HomePage.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/firebase_options.dart';
 import 'package:flightsense/regscreen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: splashscreen(),
+      home: HomePage(),
     );
   }
 }

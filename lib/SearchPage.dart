@@ -21,7 +21,7 @@ class SearchPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: Text(
-                  "Book Your Flight", // Set app bar title
+                  "Search Your Flight", // Set app bar title
                   style: TextStyle(
                     color: const Color.fromARGB(255, 254, 253,
                         253), // Set app bar title text color to black

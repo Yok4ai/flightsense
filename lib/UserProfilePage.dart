@@ -28,6 +28,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
   late String _email;
   late String _username = '';
   late String _instaname = '';
+  late String _phone = '';
+  late String _dob = '';
 
   @override
   void initState() {
@@ -180,7 +182,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
           'User Profile',
           style: TextStyle(fontSize: 24.0),
         ),
-        backgroundColor: Colors.blue,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: _refreshPage,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -230,32 +237,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget _buildUserInfoRow(IconData icon, String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
+          Icon(icon, size: 20.0),
+          SizedBox(width: 16.0),
           Text(
             label,
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 18.0),
           ),
-          SizedBox(height: 8.0),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: Row(
-              children: [
-                Icon(icon, size: 20.0),
-                SizedBox(width: 8.0),
-                Expanded(
-                  child: Text(
-                    value,
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                ),
-              ],
-            ),
+          SizedBox(width: 16.0),
+          Text(
+            value,
+            style: TextStyle(fontSize: 18.0),
           ),
         ],
       ),

@@ -1,4 +1,6 @@
+import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/firebase_options.dart';
+import 'package:flightsense/regscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import Firebase core
 // Import firebase_option.dart
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: const splashscreen(), // Correct capitalization and instantiation
+      home: splashscreen(),
     );
   }
 }

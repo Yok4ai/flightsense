@@ -37,6 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.6
   animated_splash_screen: ^1.1.8
   firebase_auth: ^4.17.9
+  http: 1.2.1
+  cloud_firestore: ^4.15.9
+  image_picker: ^1.0.7
+
 
   firebase_core: any
   page_transition: any
@@ -64,6 +68,7 @@ flutter:
 
   assets:
     - assets/images/planewhite.png
+    - assets/images/gojo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

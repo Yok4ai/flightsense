@@ -38,6 +38,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
     _fetchUserEmail();
     _fetchUsername(_email);
     _fetchUserinsta(_email);
+    _fetchUserDOB(_email);
+    _fetchUserPhone(_email);
   }
 
   Future<void> _fetchUserEmail() async {

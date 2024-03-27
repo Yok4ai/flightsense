@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'EditProfilePage.dart';
 
@@ -9,7 +9,7 @@ class UserProfilePage extends StatefulWidget {
   final String dateOfBirth;
   final String phoneNumber;
   final String instagramUsername;
-  final String email; // Include email field in the constructor
+  final String email;
 
   UserProfilePage({
     required this.profileImageUrl,
@@ -26,14 +26,16 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   late String _email;
-  late String _username= '';
-  late String _instaname= '';
+  late String _username = '';
+  late String _instaname = '';
+  late String _phone = '';
+  late String _dob = '';
 
   @override
   void initState() {
     super.initState();
-    _email = widget.email; // Initialize with the provided email
-    _fetchUserEmail(); // Fetch the user's email
+    _email = widget.email;
+    _fetchUserEmail();
     _fetchUsername(_email);
     _fetchUserinsta(_email);
   }
@@ -42,7 +44,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null && user.email != null) {
       setState(() {
-        _email = user.email!; // Update _email if the user's email is not null
+        _email = user.email!;
       });
     }
   }
@@ -71,7 +73,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     }
   }
 
-   Future<void> _fetchUserinsta(String email) async {
+  Future<void> _fetchUserinsta(String email) async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('users')
@@ -95,6 +97,54 @@ class _UserProfilePageState extends State<UserProfilePage> {
     }
   }
 
+  Future<void> _fetchUserDOB(String email) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        var data = querySnapshot.docs.first.data() as Map<String, dynamic>;
+        setState(() {
+          _dob = data['dateOfBirth'];
+        });
+      } else {
+        setState(() {
+          _dob = 'User with email $email not found.';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _dob = 'Error fetching insta: $e';
+      });
+    }
+  }
+
+  Future<void> _fetchUserPhone(String email) async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        var data = querySnapshot.docs.first.data() as Map<String, dynamic>;
+        setState(() {
+          _phone = data['phoneNumber'];
+        });
+      } else {
+        setState(() {
+          _phone = 'User with email $email not found.';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _phone = 'Error fetching insta: $e';
+      });
+    }
+  }
+
   void _updateUserProfile({
     required String name,
     required String dateOfBirth,
@@ -107,10 +157,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
     });
   }
 
+  void _refreshPage() {
+    // Implement your logic to refresh data here
+    _fetchUserEmail();
+    _fetchUsername(_email);
+    _fetchUserinsta(_email);
+    _fetchUserDOB(_email);
+    _fetchUserPhone(_email);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_email.isEmpty) {
-      // If email is empty, show a loading indicator or handle it accordingly
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -124,6 +182,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
           'User Profile',
           style: TextStyle(fontSize: 24.0),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: _refreshPage,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -142,11 +206,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 16.0),
-              _buildUserInfoRow(Icons.cake, 'Date of Birth:', widget.dateOfBirth),
+              _buildUserInfoRow(
+                  Icons.cake, 'Date of Birth:', _dob),
               SizedBox(height: 12.0),
-              _buildUserInfoRow(Icons.phone, 'Phone Number:', widget.phoneNumber),
+              _buildUserInfoRow(
+                  Icons.phone, 'Phone Number:', _phone),
               SizedBox(height: 12.0),
-              _buildUserInfoRow(Icons.account_box_outlined, 'Instagram:', _instaname),
+              _buildUserInfoRow(
+                  Icons.account_box_outlined, 'Instagram:', _instaname),
               SizedBox(height: 12.0),
               _buildUserInfoRow(Icons.email, 'Email:', _email),
               SizedBox(height: 20.0),
@@ -154,14 +221,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EditProfilePage(
-                      name: _username,
-                      dateOfBirth: widget.dateOfBirth,
-                      phoneNumber: widget.phoneNumber,
-                      instagramUsername: _instaname,
-                      email: _email,
-                      onUpdateProfile: _updateUserProfile,
-                    )),
+                    MaterialPageRoute(
+                        builder: (context) => EditProfilePage(email: _email)),
                   );
                 },
                 child: Text('Edit Profile'),

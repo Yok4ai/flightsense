@@ -1,27 +1,79 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class EditProfilePage extends StatelessWidget {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController dateOfBirthController = TextEditingController();
-  final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController instagramUsernameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final Function onUpdateProfile;
+class EditProfilePage extends StatefulWidget {
+  final String email;
 
-  EditProfilePage({
-    required String name,
-    required String dateOfBirth,
-    required String phoneNumber,
-    required String instagramUsername,
-    required String email,
-    required this.onUpdateProfile,
-  }) {
-    nameController.text = name;
-    dateOfBirthController.text = dateOfBirth;
-    phoneNumberController.text = phoneNumber;
-    instagramUsernameController.text = instagramUsername;
-    emailController.text = email;
+  EditProfilePage({required this.email});
+
+  @override
+  _EditProfilePageState createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  late TextEditingController _nameController;
+  late TextEditingController _dobController;
+  late TextEditingController _phoneController;
+  late TextEditingController _instaController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController();
+    _dobController = TextEditingController();
+    _phoneController = TextEditingController();
+    _instaController = TextEditingController();
   }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _dobController.dispose();
+    _phoneController.dispose();
+    _instaController.dispose();
+    super.dispose();
+  }
+
+void _updateProfile() async {
+  try {
+    // Ensure all text fields have non-null values before proceeding
+    if (_nameController.text.isNotEmpty &&
+        _dobController.text.isNotEmpty &&
+        _phoneController.text.isNotEmpty &&
+        _instaController.text.isNotEmpty) {
+
+      // Update the user document matching the provided email
+      await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: widget.email)
+          .get()
+          .then((querySnapshot) {
+            if (querySnapshot.docs.isNotEmpty) {
+              // Update the first document found
+              querySnapshot.docs.first.reference.update({
+                'username': _nameController.text,
+                'dateOfBirth': _dobController.text,
+                'phoneNumber': _phoneController.text,
+                'insta': _instaController.text,
+              });
+              Navigator.pop(context);
+            } else {
+              print('User document does not exist for email: ${widget.email}');
+            }
+          });
+    } else {
+      print('One or more text fields are empty.');
+    }
+  } catch (error) {
+    // Handle error
+    print("Failed to update user profile: $error");
+  }
+}
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,44 +81,33 @@ class EditProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Edit Profile'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextField(
-              controller: nameController,
+            TextFormField(
+              controller: _nameController,
               decoration: InputDecoration(labelText: 'Name'),
             ),
-            TextField(
-              controller: dateOfBirthController,
-              decoration:                   InputDecoration(labelText: 'Date of Birth'),
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _dobController,
+              decoration: InputDecoration(labelText: 'Date of Birth'),
             ),
-            TextField(
-              controller: phoneNumberController,
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _phoneController,
               decoration: InputDecoration(labelText: 'Phone Number'),
             ),
-            TextField(
-              controller: instagramUsernameController,
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _instaController,
               decoration: InputDecoration(labelText: 'Instagram Username'),
             ),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: () {
-                onUpdateProfile(
-                  name: nameController.text,
-                  dateOfBirth: dateOfBirthController.text,
-                  phoneNumber: phoneNumberController.text,
-                  instagramUsername: instagramUsernameController.text,
-                  email: emailController.text,
-                );
-                // Save changes and navigate back to UserProfilePage
-                Navigator.pop(context);
-              },
+              onPressed: _updateProfile,
               child: Text('Save Changes'),
             ),
           ],
@@ -75,4 +116,3 @@ class EditProfilePage extends StatelessWidget {
     );
   }
 }
-

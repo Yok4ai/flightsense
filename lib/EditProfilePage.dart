@@ -25,30 +25,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _dobController = TextEditingController();
     _phoneController = TextEditingController();
     _instaController = TextEditingController();
-
-    // Fetch user data from Firestore and populate the text fields
-    fetchUserData();
-  }
-
-  void fetchUserData() async {
-    try {
-      final userQuerySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: widget.email)
-          .get();
-
-      if (userQuerySnapshot.docs.isNotEmpty) {
-        final userData = userQuerySnapshot.docs.first.data();
-        _nameController.text = userData['username'] ?? '';
-        _dobController.text = userData['dateOfBirth'] ?? '';
-        _phoneController.text = userData['phoneNumber'] ?? '';
-        _instaController.text = userData['insta'] ?? '';
-      } else {
-        print('User document does not exist for email: ${widget.email}');
-      }
-    } catch (error) {
-      print("Failed to fetch user data: $error");
-    }
   }
 
   @override
@@ -138,4 +114,3 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 }
-

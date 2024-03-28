@@ -17,7 +17,7 @@ class splashscreen extends StatelessWidget {
           Image.asset('assets/images/planewhite.png'),
           const SizedBox(height: 20),
           const Text(
-            'Flight Sense',
+            'FlightSense',
             style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.bold,

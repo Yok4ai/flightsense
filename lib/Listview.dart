@@ -14,6 +14,8 @@ class MyListView extends StatelessWidget {
     'post 9',
     'post 10',
   ];
+
+  MyListView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

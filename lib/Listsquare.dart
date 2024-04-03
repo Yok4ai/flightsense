@@ -16,7 +16,10 @@ class Listsquare extends StatelessWidget {
               height: 150,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Text(child,style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
+                child: Text(child,style: const TextStyle(fontSize: 20,
+                color: Colors.white,
+                fontWeight: FontWeight.bold),
+                ),
               ),
 
             ),

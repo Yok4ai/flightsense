@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flightsense/Listview.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/loginscreen.dart';
 import 'package:flightsense/SearchPage.dart'; // Import SearchPage.dart
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.home),
     const Icon(Icons.account_circle),
     const Icon(Icons.search),
-    const Icon(Icons.settings), // Add settings icon
+    const Icon(Icons.logout), // Add settings icon
   ];
 
   // GlobalKey to access the ScaffoldState for opening the drawer
@@ -60,6 +61,13 @@ class _HomePageState extends State<HomePage> {
           context,
           MaterialPageRoute(
               builder: (context) => SearchPage()), // Navigate to SearchPage
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => LoginScreen()), // Navigate to SearchPage
         );
         break;
       default:
@@ -102,71 +110,77 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.lightBlue.shade200,
       key: _scaffoldKey, // Assigning the GlobalKey to Scaffold
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0), // Set the preferred height
-        child: Container(
-          height: 600,
-          width: double.infinity,
-          child: Padding(
-            padding: EdgeInsets.only(left: 19, right: 19),
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.white),
-                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-                ),
-                Spacer(),
-                FutureBuilder<String>(
-                  future: _usernameFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    } else if (snapshot.hasData) {
-                      return Row(
-                        children: [
-                          Text(
-                            '${snapshot.data}',
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(width: 10),
-                          GestureDetector(
-                            onTap: () => {
-                              Navigator.push(
-                                // ignore: use_build_context_synchronously
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return UserProfilePage(
-                                      profileImageUrl: 'assets/images/gojo.png',
-                                      name: '',
-                                      phoneNumber: '',
-                                      email: '',
-                                      instagramUsername: '',
-                                      dateOfBirth: '',
-                                    );
-                                  },
-                                ),
-                              ),
-                            },
-                            child: CircleAvatar(
-                              radius: 25,
-                              backgroundImage:
-                                  AssetImage('assets/images/gojo.png'),
+        preferredSize: Size.fromHeight(150.0), // Set the preferred height
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+               color: Colors.lightBlue.shade900,
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+            ),
+            height: 300,
+            child: Padding(
+              padding: EdgeInsets.only(left: 18,right: 18),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.menu, color: Colors.white),
+                    onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                  ),
+                  Spacer(),
+                  FutureBuilder<String>(
+                    future: _usernameFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasData) {
+                        return Row(
+                          children: [
+                            Text(
+                              '${snapshot.data}',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Text('Error fetching username');
-                    }
-                  },
-                ),
-              ],
+                            SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () => {
+                                Navigator.push(
+                                  // ignore: use_build_context_synchronously
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return UserProfilePage(
+                                        profileImageUrl: 'assets/images/gojo.png',
+                                        name: '',
+                                        phoneNumber: '',
+                                        email: '',
+                                        instagramUsername: '',
+                                        dateOfBirth: '',
+                                      );
+                                    },
+                                  ),
+                                ),
+                              },
+                              child: CircleAvatar(
+                                radius: 25,
+                                backgroundImage:
+                                    AssetImage('assets/images/gojo.png'),
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Text('Error fetching username');
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -210,7 +224,7 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 selected: _selectedIndex == 3,
                 leading: _navigationItems[3],
-                title: const Text('Settings'),
+                title: const Text('Sign Out'),
                 onTap: () => _onItemTapped(3), // Handle settings tap (optional)
               ),
             ],
@@ -219,17 +233,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 200.0),
+          padding: const EdgeInsets.all(10.0),
           child: Container(
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 26, 91, 144),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-              ),
+              color: Colors.lightBlue.shade900,
+              borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
             height: MediaQuery.of(context).size.height,
-            width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -237,7 +247,10 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   SizedBox(height: 20),
                   Text('From',
-                      style: TextStyle(fontSize: 16, color: Colors.white ,fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
@@ -255,7 +268,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 20),
                   Text('To',
-                      style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
@@ -264,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.location_on, color: Colors.blue),
+                        prefixIcon: Icon(Icons.send, color: Colors.blue),
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                         ),
@@ -273,7 +289,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 20),
                   Text('Date',
-                      style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
@@ -281,10 +300,6 @@ class _HomePageState extends State<HomePage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: TextField(
-                      readOnly: true,
-                      onTap: () {
-                        // Handle date selection
-                      },
                       decoration: InputDecoration(
                         prefixIcon:
                             Icon(Icons.calendar_today, color: Colors.blue),
@@ -295,33 +310,41 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(
-                  height: 30,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    
-                  },
-                  child: Center(
-                    child: Container(
-                      height: 55,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 26, 148, 255),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Search",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                    height: 30,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        // ignore: use_build_context_synchronously
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return MyListView();
+                          },
+                        ),
+                      );
+                    },
+                    child: Center(
+                      child: Container(
+                        height: 55,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 26, 148, 255),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Search",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
                 ],
               ),
             ),

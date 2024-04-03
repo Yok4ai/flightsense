@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/loginscreen.dart';
 import 'package:flightsense/searchpage.dart'; // Import SearchPage.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -56,7 +58,8 @@ class _HomePageState extends State<HomePage> {
       case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SearchPage()), // Navigate to SearchPage
+          MaterialPageRoute(
+              builder: (context) => SearchPage()), // Navigate to SearchPage
         );
         break;
       default:
@@ -65,17 +68,108 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  late Future<String> _usernameFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameFuture = _fetchUsername();
+  }
+
+  Future<String> _fetchUsername() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null && user.email != null) {
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: user.email)
+            .get();
+
+        if (querySnapshot.docs.isNotEmpty) {
+          var data = querySnapshot.docs.first.data() as Map<String, dynamic>;
+          return data['username'];
+        } else {
+          return 'User not found';
+        }
+      } else {
+        return 'User not logged in';
+      }
+    } catch (e) {
+      return 'Error fetching username: $e';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       key: _scaffoldKey, // Assigning the GlobalKey to Scaffold
-      appBar: AppBar(
-        title: const Text('FlightSense'),
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () => _scaffoldKey.currentState?.openDrawer(), // Open drawer on menu tap
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100.0), // Set the preferred height
+        child: Container(
+          height: 600,
+          width: double.infinity,
+          child: Padding(
+            padding: EdgeInsets.only(left: 19, right: 19),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.menu, color: Colors.white),
+                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                ),
+                Spacer(),
+                FutureBuilder<String>(
+                  future: _usernameFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasData) {
+                      return Row(
+                        children: [
+                          Text(
+                            '${snapshot.data}',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () => {
+                              Navigator.push(
+                                // ignore: use_build_context_synchronously
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return UserProfilePage(
+                                      profileImageUrl: 'assets/images/gojo.png',
+                                      name: '',
+                                      phoneNumber: '',
+                                      email: '',
+                                      instagramUsername: '',
+                                      dateOfBirth: '',
+                                    );
+                                  },
+                                ),
+                              ),
+                            },
+                            child: CircleAvatar(
+                              radius: 25,
+                              backgroundImage:
+                                  AssetImage('assets/images/gojo.png'),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Text('Error fetching username');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
-        backgroundColor: Colors.blue, // Specify the desired color
       ),
       drawer: Drawer(
         child: Material(
@@ -123,9 +217,116 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Center(
-        // Replace with your actual home page content
-        child: _selectedIndex == 0 ? Text('Signed In as: ${user.email!}') : const Text('Content for other pages'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 200.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 26, 91, 144),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+            height: MediaQuery.of(context).size.height,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20),
+                  Text('From',
+                      style: TextStyle(fontSize: 16, color: Colors.white ,fontWeight: FontWeight.bold)),
+                  SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.location_on, color: Colors.blue),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text('To',
+                      style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold)),
+                  SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.location_on, color: Colors.blue),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text('Date',
+                      style: TextStyle(fontSize: 16, color: Colors.white,fontWeight: FontWeight.bold)),
+                  SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: TextField(
+                      readOnly: true,
+                      onTap: () {
+                        // Handle date selection
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon:
+                            Icon(Icons.calendar_today, color: Colors.blue),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    
+                  },
+                  child: Center(
+                    child: Container(
+                      height: 55,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 26, 148, 255),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Search",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

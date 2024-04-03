@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/ForgetPasswordPage.dart';
 import 'package:flightsense/HomePage.dart';
+import 'package:flightsense/New_HomePage.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {

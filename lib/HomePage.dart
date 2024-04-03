@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/loginscreen.dart';
-import 'package:flightsense/searchpage.dart'; // Import SearchPage.dart
+import 'package:flightsense/SearchPage.dart'; // Import SearchPage.dart
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

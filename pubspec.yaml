@@ -74,12 +74,10 @@ flutter:
     - assets/images/planewhite.png
     - assets/images/gojo.png
     - assets/images/tt.jpg
-<<<<<<< HEAD
     - assets/data.csv
     - assets/economy.csv
-=======
     - assets/images/download.png
->>>>>>> afda43ce4c28d0c8cdf25f3a53764349ae045cdc
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

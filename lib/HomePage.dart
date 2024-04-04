@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flightsense/CSV2.dart';
 import 'package:flightsense/Listview.dart';
 import 'package:flightsense/Threads.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/loginscreen.dart';
-import 'package:flightsense/SearchPage.dart'; // Import SearchPage.dart
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flightsense/SearchPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.account_circle),
     const Icon(Icons.chat),
     const Icon(Icons.search),
+    const Icon(Icons.flight),
     const Icon(Icons.logout), // Add settings icon
   ];
 
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
               builder: (context) => Threads()), // Navigate to SearchPage
         );
         break;
-        case 3:
+      case 3:
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -76,7 +77,14 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => LoginScreen()), // Navigate to SearchPage
+              builder: (context) => CSVFlight()), // Navigate to CSVFlight
+        );
+        break;
+      case 5:
+        FirebaseAuth.instance.signOut();
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
         );
         break;
       default:
@@ -127,12 +135,12 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
-               color: Colors.lightBlue.shade900,
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
+              color: Colors.lightBlue.shade900,
+              borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
             height: 300,
             child: Padding(
-              padding: EdgeInsets.only(left: 18,right: 18),
+              padding: EdgeInsets.only(left: 18, right: 18),
               child: Row(
                 children: [
                   IconButton(
@@ -164,7 +172,8 @@ class _HomePageState extends State<HomePage> {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return UserProfilePage(
-                                        profileImageUrl: 'assets/images/gojo.png',
+                                        profileImageUrl:
+                                            'assets/images/gojo.png',
                                         name: '',
                                         phoneNumber: '',
                                         email: '',
@@ -239,8 +248,14 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 selected: _selectedIndex == 4,
                 leading: _navigationItems[4],
-                title: const Text('Sign Out'),
+                title: const Text('Flights'),
                 onTap: () => _onItemTapped(4), // Handle settings tap (optional)
+              ),
+              ListTile(
+                selected: _selectedIndex == 5,
+                leading: _navigationItems[5],
+                title: const Text('Sign Out'),
+                onTap: () => _onItemTapped(5), // Handle settings tap (optional)
               ),
             ],
           ),

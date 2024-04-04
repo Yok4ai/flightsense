@@ -40,6 +40,8 @@ dependencies:
   http: 1.2.1
   cloud_firestore: ^4.15.9
   image_picker: ^1.0.7
+  google_sign_in: ^6.2.1
+  intl: ^0.19.0
 
 
   firebase_core: any
@@ -71,6 +73,7 @@ flutter:
     - assets/images/planewhite.png
     - assets/images/gojo.png
     - assets/images/tt.jpg
+    - assets/images/download.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/Listview.dart';
+import 'package:flightsense/Threads.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/loginscreen.dart';
 import 'package:flightsense/SearchPage.dart'; // Import SearchPage.dart
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _navigationItems = [
     const Icon(Icons.home),
     const Icon(Icons.account_circle),
+    const Icon(Icons.chat),
     const Icon(Icons.search),
     const Icon(Icons.logout), // Add settings icon
   ];
@@ -60,10 +62,17 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
+              builder: (context) => Threads()), // Navigate to SearchPage
+        );
+        break;
+        case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
               builder: (context) => SearchPage()), // Navigate to SearchPage
         );
         break;
-      case 3:
+      case 4:
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -218,14 +227,20 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 selected: _selectedIndex == 2,
                 leading: _navigationItems[2],
-                title: const Text('Search'),
+                title: const Text('Threads'),
                 onTap: () => _onItemTapped(2),
               ),
               ListTile(
                 selected: _selectedIndex == 3,
                 leading: _navigationItems[3],
-                title: const Text('Sign Out'),
+                title: const Text('Search'),
                 onTap: () => _onItemTapped(3), // Handle settings tap (optional)
+              ),
+              ListTile(
+                selected: _selectedIndex == 4,
+                leading: _navigationItems[4],
+                title: const Text('Sign Out'),
+                onTap: () => _onItemTapped(4), // Handle settings tap (optional)
               ),
             ],
           ),

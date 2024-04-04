@@ -36,11 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-<<<<<<< HEAD
       home: CSVFlight(),
-=======
-      home: splashscreen(),
->>>>>>> afda43ce4c28d0c8cdf25f3a53764349ae045cdc
     );
   }
 }

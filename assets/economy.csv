@@ -1,0 +1,43 @@
+0, Lufthansa, LH-1234, Frankfurt, Morning, Zero, Afternoon, Paris, Economy, 2.5, 2, 5432
+1, Emirates, EK-5678, Dubai, Afternoon, One, Evening, London, Business, 3.1, 3, 6543
+2, Singapore Airlines, SQ-9012, Singapore, Evening, Two, Night, Tokyo, Economy, 5.2, 1, 7654
+3, Qantas, QF-3456, Sydney, Morning, Zero, Morning, Melbourne, Business, 1.9, 2, 8765
+4, Air France, AF-7890, Paris, Afternoon, One, Afternoon, Rome, Economy, 2.8, 4, 9876
+5, British Airways, BA-2345, London, Evening, Two, Evening, Amsterdam, Business, 2.7, 3, 4567
+6, Cathay Pacific, CX-6789, Hong Kong, Morning, Zero, Night, Shanghai, Economy, 3.4, 2, 5432
+7, Qatar Airways, QR-4321, Doha, Afternoon, One, Evening, Abu Dhabi, Business, 2.1, 1, 6543
+8, KLM Royal Dutch Airlines, KL-7890, Amsterdam, Evening, Two, Morning, Zurich, Economy, 1.8, 3, 5432
+9, Delta Air Lines, DL-9012, New York, Morning, Zero, Afternoon, Los Angeles, Business, 6.0, 4, 4321
+10, Turkish Airlines, TK-1234, Istanbul, Afternoon, One, Evening, Athens, Economy, 1.7, 2, 6789
+11, Qantas, QF-5678, Sydney, Evening, Two, Night, Melbourne, Business, 2.3, 1, 5678
+12, Air Canada, AC-9012, Toronto, Morning, Zero, Morning, Vancouver, Economy, 4.2, 4, 7890
+13, Emirates, EK-3456, Dubai, Afternoon, One, Afternoon, Mumbai, Business, 3.5, 3, 8765
+14, Singapore Airlines, SQ-7890, Singapore, Evening, Two, Evening, Bangkok, Economy, 2.6, 1, 9876
+15, Lufthansa, LH-2345, Frankfurt, Morning, Zero, Night, Berlin, Business, 1.9, 2, 4567
+16, British Airways, BA-6789, London, Afternoon, One, Evening, Paris, Economy, 1.5, 3, 5432
+17, Air France, AF-9012, Paris, Evening, Two, Morning, Barcelona, Business, 2.8, 4, 6543
+18, Cathay Pacific, CX-3456, Hong Kong, Morning, Zero, Afternoon, Singapore, Economy, 4.1, 2, 7654
+19, Delta Air Lines, DL-5678, New York, Afternoon, One, Evening, Miami, Business, 2.2, 1, 8765
+20, KLM Royal Dutch Airlines, KL-7890, Amsterdam, Evening, Two, Night, Brussels, Economy, 1.7, 3, 9876
+21, Turkish Airlines, TK-2345, Istanbul, Morning, Zero, Morning, Ankara, Business, 1.8, 4, 4321
+22, Qatar Airways, QR-6789, Doha, Afternoon, One, Afternoon, Dubai, Economy, 1.9, 2, 6789
+23, Air Canada, AC-9012, Toronto, Evening, Two, Evening, Montreal, Business, 2.3, 3, 5678
+24, Emirates, EK-1234, Dubai, Morning, Zero, Night, Abu Dhabi, Economy, 1.5, 1, 5432
+25, Lufthansa, LH-3456, Frankfurt, Afternoon, One, Evening, Munich, Business, 1.7, 2, 6543
+26, British Airways, BA-7890, London, Evening, Two, Night, Edinburgh, Economy, 1.6, 4, 8765
+27, Air France, AF-2345, Paris, Morning, Zero, Morning, Lyon, Business, 2.2, 3, 9876
+28, Cathay Pacific, CX-6789, Hong Kong, Afternoon, One, Afternoon, Beijing, Economy, 3.0, 1, 4567
+29, Delta Air Lines, DL-9012, New York, Evening, Two, Evening, Chicago, Business, 2.8, 2, 5432
+30, KLM Royal Dutch Airlines, KL-1234, Amsterdam, Morning, Zero, Night, Hamburg, Economy, 1.9, 3, 6543
+31, Turkish Airlines, TK-5678, Istanbul, Afternoon, One, Morning, Izmir, Business, 1.6, 4, 7654
+32, Qatar Airways, QR-9012, Doha, Evening, Two, Afternoon, Muscat, Economy, 1.8, 1, 9876
+33, Air Canada, AC-2345, Toronto, Morning, Zero, Afternoon, Ottawa, Business, 1.5, 2, 5432
+34, Emirates, EK-6789, Dubai, Afternoon, One, Evening, Abu Dhabi, Economy, 1.9, 3, 6543
+35, Lufthansa, LH-1234, Frankfurt, Evening, Two, Night, Zurich, Business, 2.1, 4, 7654
+36, British Airways, BA-5678, London, Morning, Zero, Morning, Manchester, Economy, 1.7, 1, 8765
+37, Air France, AF-9012, Paris, Afternoon, One, Afternoon, Nice, Business, 1.8, 2, 9876
+38, Cathay Pacific, CX-2345, Hong Kong, Evening, Two, Evening, Seoul, Economy, 3.5, 3, 4567
+39, Delta Air Lines, DL-6789, New York, Morning, Zero, Afternoon, Washington D.C., Business, 2.0, 2, 5432
+40, KLM Royal Dutch Airlines, KL-9012, Amsterdam, Afternoon, One, Evening, Copenhagen, Economy, 2.3, 4, 6543
+41, Turkish Airlines, TK-3456, Istanbul, Evening, Two, Night, Antalya, Business, 2.4, 1, 7654
+42, Air France, AF-9012, Paris, Morning, Zero, Evening, Barcelona, Economy, 2.8, 4, 6840

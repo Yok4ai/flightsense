@@ -3,6 +3,7 @@ import 'package:flightsense/CSVRead.dart';
 import 'package:flightsense/HomePage.dart';
 import 'package:flightsense/Listview.dart';
 import 'package:flightsense/New_HomePage.dart';
+import 'package:flightsense/Threads.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/firebase_options.dart';
 import 'package:flightsense/loginscreen.dart';
@@ -35,7 +36,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
+<<<<<<< HEAD
       home: CSVFlight(),
+=======
+      home: splashscreen(),
+>>>>>>> afda43ce4c28d0c8cdf25f3a53764349ae045cdc
     );
   }
 }

@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+<<<<<<< HEAD
 import 'package:flightsense/BookingHistory.dart';
+=======
+import 'package:flightsense/chat/ChatPage.dart';
+>>>>>>> 7250e540278e39ee083fb32818f948f92c9749e5
 import 'package:flutter/material.dart';
 import 'package:flightsense/CSV2.dart';
 import 'package:flightsense/Listview.dart';
@@ -26,8 +30,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _navigationItems = [
     const Icon(Icons.home),
     const Icon(Icons.account_circle),
-    const Icon(Icons.chat),
-    const Icon(Icons.search),
+    const Icon(Icons.post_add),
+    const Icon(Icons.chat_bubble),
     const Icon(Icons.flight),
     const Icon(Icons.history),
     const Icon(Icons.logout), // Add settings icon
@@ -72,7 +76,7 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => SearchPage()), // Navigate to SearchPage
+              builder: (context) => ChatPage()), // Navigate to SearchPage
         );
         break;
       case 4:
@@ -251,7 +255,7 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 selected: _selectedIndex == 3,
                 leading: _navigationItems[3],
-                title: const Text('Search'),
+                title: const Text('Chat'),
                 onTap: () => _onItemTapped(3), // Handle settings tap (optional)
               ),
               ListTile(

@@ -5,6 +5,7 @@ import 'package:flightsense/Listview.dart';
 import 'package:flightsense/New_HomePage.dart';
 import 'package:flightsense/Threads.dart';
 import 'package:flightsense/UserProfilePage.dart';
+import 'package:flightsense/chat/ChatPage.dart';
 import 'package:flightsense/firebase_options.dart';
 import 'package:flightsense/loginscreen.dart';
 import 'package:flightsense/regscreen.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: splashscreen(),
+      home: LoginScreen(),
     );
   }
 }

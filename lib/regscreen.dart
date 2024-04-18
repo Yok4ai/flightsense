@@ -22,6 +22,7 @@ class _RegScreenState extends State<RegScreen> {
   // Firestore reference
   final CollectionReference _usersCollection =
       FirebaseFirestore.instance.collection('users');
+  final FirebaseFirestore _firestore1= FirebaseFirestore.instance;
 
   bool PasswordConfirmed() {
     return _passwordController.text.trim() ==
@@ -46,10 +47,18 @@ Future<void> signUP(BuildContext context) async {
     } else {
       try {
         // Create user in FirebaseAuth
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        UserCredential userCredential= await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
+
+_firestore1.collection("Users").doc(userCredential.user!.uid).set(
+  {
+    'uid':userCredential.user!.uid,
+    'email': _emailController,
+  }
+);
+
 
         _showErrorDialog(context, "SignUP is Successful. You can SignIn now");
         await Future.delayed(const Duration(seconds: 2));

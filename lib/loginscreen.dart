@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/ForgetPasswordPage.dart';
 import 'package:flightsense/HomePage.dart';
 import 'package:flightsense/New_HomePage.dart';
+import 'package:flightsense/chat/ChatPage.dart';
+import 'package:flightsense/chat/ChatRoom.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -14,24 +17,42 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // This widget is the root of your application.
+  final FirebaseFirestore _firestore1 = FirebaseFirestore.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   Future signIn() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      Navigator.push(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return HomePage();
-          },
-        ),
-      );
+      _firestore1.collection("Users").doc(userCredential.user!.uid).set({
+        'uid': userCredential.user!.uid,
+        'email': _emailController,
+      });
+
+// Get the current user
+final user = FirebaseAuth.instance.currentUser;
+
+if (user != null) {
+  // User is signed in
+  final email1 = user.email;
+  print('Current user email: $email1');
+  
+  // Navigate to ChatPage and pass the current user's email
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => HomePage(),
+    ),
+  );
+} else {
+  // No user is signed in
+  print('No user signed in.');
+}
+
       // Sign-in successful, navigate or perform other actions
       print("Sign-in successful!"); // Or navigate to a home screen
     } on FirebaseAuthException catch (e) {
@@ -74,19 +95,20 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   signInWithGoogle() async {
-  // Trigger the authentication flow
-  GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // Trigger the authentication flow
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-  // Obtain the auth details from the request
-  GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    // Obtain the auth details from the request
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-  // Create a new credential
-  AuthCredential credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
+    // Create a new credential
+    AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
 
-   UserCredential userCredential=await FirebaseAuth.instance.signInWithCredential(credential);
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
 
     Navigator.push(
       context,
@@ -96,11 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       ),
     );
-  // Once signed in, return the UserCredential
-  print(userCredential.user?.displayName);
-}
-
-
+    // Once signed in, return the UserCredential
+    print(userCredential.user?.displayName);
+  }
 
   @override
   Widget build(BuildContext context) {

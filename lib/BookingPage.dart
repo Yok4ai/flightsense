@@ -14,7 +14,7 @@ class BookingPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 111, 30, 241),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 29, 1, 73),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         title: Text('Booking'),
       ),
       body: Padding(

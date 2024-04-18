@@ -30,6 +30,7 @@ class FlightDetailsPage extends StatelessWidget {
             Text(
               'Flight Details',
               style: TextStyle(
+                color: Colors.white,
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               ),

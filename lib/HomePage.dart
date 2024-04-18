@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-<<<<<<< HEAD
 import 'package:flightsense/BookingHistory.dart';
-=======
 import 'package:flightsense/chat/ChatPage.dart';
->>>>>>> 7250e540278e39ee083fb32818f948f92c9749e5
 import 'package:flutter/material.dart';
 import 'package:flightsense/CSV2.dart';
 import 'package:flightsense/Listview.dart';

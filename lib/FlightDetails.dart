@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'BookingPage.dart'; // Importing the BookingPage
 
 class FlightDetailsPage extends StatelessWidget {
   final List<dynamic> row;
@@ -23,37 +24,41 @@ class FlightDetailsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Card(
-          elevation: 8.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Flight Details',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                _buildDetailRow('Airline', '${row[1]}'),
-                _buildDetailRow('Code', '${row[2]}'),
-                _buildDetailRow('From', '${row[3]}'),
-                _buildDetailRow('Departure', '${row[4]}'),
-                _buildDetailRow('Stops', '${row[5]}'),
-                _buildDetailRow('Arrival', '${row[6]}'),
-                _buildDetailRow('To', '${row[7]}'),
-                _buildDetailRow('Class', '${row[8]}'),
-                _buildDetailRow('Duration', '${row[9]}'),
-                _buildDetailRow('Price', '${row[11]}'),
-              ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Flight Details',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
+            SizedBox(height: 20.0),
+            _buildDetailRow('Airline', '${row[1]}'),
+            _buildDetailRow('Code', '${row[2]}'),
+            _buildDetailRow('From', '${row[3]}'),
+            _buildDetailRow('Departure', '${row[4]}'),
+            _buildDetailRow('Stops', '${row[5]}'),
+            _buildDetailRow('Arrival', '${row[6]}'),
+            _buildDetailRow('To', '${row[7]}'),
+            _buildDetailRow('Class', '${row[8]}'),
+            _buildDetailRow('Duration', '${row[9]}'),
+            _buildDetailRow('Price', '${row[11]}'),
+            SizedBox(height: 20.0),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BookingPage(row: row)),
+                  );
+                },
+                child: Text('Book Flight'),
+              ),
+            ),
+          ],
         ),
       ),
     );

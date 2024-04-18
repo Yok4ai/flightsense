@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flightsense/BookingHistory.dart';
 import 'package:flutter/material.dart';
 import 'package:flightsense/CSV2.dart';
 import 'package:flightsense/Listview.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.chat),
     const Icon(Icons.search),
     const Icon(Icons.flight),
+    const Icon(Icons.history),
     const Icon(Icons.logout), // Add settings icon
   ];
 
@@ -80,7 +82,14 @@ class _HomePageState extends State<HomePage> {
               builder: (context) => CSVFlight()), // Navigate to CSVFlight
         );
         break;
-      case 5:
+        case 5:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BookingHistoryPage()), // Navigate to CSVFlight
+        );
+        break;
+      case 6:
         FirebaseAuth.instance.signOut();
         Navigator.pushReplacement(
           context,
@@ -251,11 +260,17 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Flights'),
                 onTap: () => _onItemTapped(4), // Handle settings tap (optional)
               ),
-              ListTile(
+               ListTile(
                 selected: _selectedIndex == 5,
                 leading: _navigationItems[5],
-                title: const Text('Sign Out'),
+                title: const Text('History'),
                 onTap: () => _onItemTapped(5), // Handle settings tap (optional)
+              ),
+              ListTile(
+                selected: _selectedIndex == 6,
+                leading: _navigationItems[6],
+                title: const Text('Sign Out'),
+                onTap: () => _onItemTapped(6), // Handle settings tap (optional)
               ),
             ],
           ),

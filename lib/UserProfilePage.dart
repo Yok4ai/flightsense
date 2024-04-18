@@ -160,7 +160,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
   }
 
   void _refreshPage() {
-    // Implement your logic to refresh data here
+    // This method will be called 
+    //when the refresh button is pressed
     _fetchUserEmail();
     _fetchUsername(_email);
     _fetchUserinsta(_email);

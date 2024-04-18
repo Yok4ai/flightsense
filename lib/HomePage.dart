@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           context,
           MaterialPageRoute(
             builder: (context) => UserProfilePage(
-              profileImageUrl: 'assets/images/gojo.png',
+              profileImageUrl: 'assets/images/user.png',
               name: 'Shuvo',
               phoneNumber: '01866946299',
               email: 'shuvo.sss1906@gmail.com',
@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                                     builder: (context) {
                                       return UserProfilePage(
                                         profileImageUrl:
-                                            'assets/images/gojo.png',
+                                            'assets/images/user.png',
                                         name: '',
                                         phoneNumber: '',
                                         email: '',
@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                               child: CircleAvatar(
                                 radius: 25,
                                 backgroundImage:
-                                    AssetImage('assets/images/gojo.png'),
+                                    AssetImage('assets/images/user.png'),
                               ),
                             ),
                           ],

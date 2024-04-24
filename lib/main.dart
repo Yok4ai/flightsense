@@ -1,9 +1,10 @@
+import 'package:flightsense/BookingHistory.dart';
 import 'package:flightsense/CSV.dart';
 import 'package:flightsense/CSVRead.dart';
 import 'package:flightsense/HomePage.dart';
 import 'package:flightsense/Listview.dart';
 import 'package:flightsense/New_HomePage.dart';
-import 'package:flightsense/Threads.dart';
+import 'package:flightsense/RateReviewPage.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/chat/ChatPage.dart';
 import 'package:flightsense/firebase_options.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: LoginScreen(),
+      home: HomePage(),
     );
   }
 }

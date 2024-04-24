@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/BookingHistory.dart';
+import 'package:flightsense/ReviewsShow.dart';
 import 'package:flightsense/chat/ChatPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flightsense/CSV2.dart';
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.chat_bubble),
     const Icon(Icons.flight),
     const Icon(Icons.history),
+    const Icon(Icons.reviews),
     const Icon(Icons.logout), // Add settings icon
   ];
 
@@ -83,14 +85,22 @@ class _HomePageState extends State<HomePage> {
               builder: (context) => CSVFlight()), // Navigate to CSVFlight
         );
         break;
-        case 5:
+      case 5:
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => BookingHistoryPage()), // Navigate to CSVFlight
+              builder: (context) =>
+                  BookingHistoryPage()), // Navigate to CSVFlight
         );
         break;
       case 6:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ReviewShowPage()), // Navigate to CSVFlight
+        );
+        break;
+      case 7:
         FirebaseAuth.instance.signOut();
         Navigator.pushReplacement(
           context,
@@ -261,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Flights'),
                 onTap: () => _onItemTapped(4), // Handle settings tap (optional)
               ),
-               ListTile(
+              ListTile(
                 selected: _selectedIndex == 5,
                 leading: _navigationItems[5],
                 title: const Text('History'),
@@ -270,8 +280,14 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 selected: _selectedIndex == 6,
                 leading: _navigationItems[6],
-                title: const Text('Sign Out'),
+                title: const Text('Reviews'),
                 onTap: () => _onItemTapped(6), // Handle settings tap (optional)
+              ),
+              ListTile(
+                selected: _selectedIndex == 7,
+                leading: _navigationItems[7],
+                title: const Text('Sign Out'),
+                onTap: () => _onItemTapped(7), // Handle settings tap (optional)
               ),
             ],
           ),

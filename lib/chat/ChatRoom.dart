@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class ChatRoom extends StatefulWidget {
   final String receiveEmail;
 
-  ChatRoom({required this.receiveEmail});
+  const ChatRoom({super.key, required this.receiveEmail});
 
   @override
   _ChatRoomState createState() => _ChatRoomState();
@@ -39,7 +39,7 @@ class _ChatRoomState extends State<ChatRoom> {
         .snapshots(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       } else if (snapshot.hasError) {
@@ -55,14 +55,14 @@ class _ChatRoomState extends State<ChatRoom> {
             final message = messages[index].data() as Map<String, dynamic>;
             final isCurrentUser = message['senderEmail'] == _auth.currentUser!.email;
             return Padding(
-              padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
               child: IntrinsicWidth(
                 child: Container(
                   decoration: BoxDecoration(
                     color: isCurrentUser ? Colors.blue : Colors.green,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Align(
                     alignment: isCurrentUser ? Alignment.centerLeft : Alignment.centerRight,
                     child: Column(
@@ -70,11 +70,11 @@ class _ChatRoomState extends State<ChatRoom> {
                       children: [
                         Text(
                           message['message'] ?? 'No message',
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                         Text(
                           message['senderEmail'] ?? 'Unknown sender',
-                          style: TextStyle(color: Colors.white70),
+                          style: const TextStyle(color: Colors.white70),
                         ),
                       ],
                     ),
@@ -94,17 +94,17 @@ class _ChatRoomState extends State<ChatRoom> {
 
   Widget _buildMessageComposer() {
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: _messageController,
-              decoration: InputDecoration(labelText: 'Enter your message...'),
+              decoration: const InputDecoration(labelText: 'Enter your message...'),
             ),
           ),
           IconButton(
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
             onPressed: () {
               _sendMessage();
             },

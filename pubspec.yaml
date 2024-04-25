@@ -48,6 +48,7 @@ dependencies:
   page_transition: any
   flutter_spinkit: ^5.2.1
   csv: ^6.0.0
+  flutter_sslcommerz: ^2.2.2-nullsafety.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

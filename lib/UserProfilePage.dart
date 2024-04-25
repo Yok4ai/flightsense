@@ -11,7 +11,7 @@ class UserProfilePage extends StatefulWidget {
   final String instagramUsername;
   final String email;
 
-  UserProfilePage({
+  const UserProfilePage({super.key, 
     required this.profileImageUrl,
     required this.name,
     required this.dateOfBirth,
@@ -172,7 +172,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     if (_email.isEmpty) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),
@@ -181,13 +181,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'User Profile',
           style: TextStyle(fontSize: 24.0),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: _refreshPage,
           ),
         ],
@@ -203,23 +203,23 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   backgroundImage: AssetImage(widget.profileImageUrl),
                 ),
               ),
-              SizedBox(height: 24.0),
+              const SizedBox(height: 24.0),
               Text(
                 _username,
-                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               _buildUserInfoRow(
                   Icons.cake, 'Date of Birth:', _dob),
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               _buildUserInfoRow(
                   Icons.phone, 'Phone Number:', _phone),
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               _buildUserInfoRow(
                   Icons.account_box_outlined, 'Instagram:', _instaname),
-              SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
               _buildUserInfoRow(Icons.email, 'Email:', _email),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -228,7 +228,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         builder: (context) => EditProfilePage(email: _email, refreshPage: _refreshPage,)),
                   );
                 },
-                child: Text('Edit Profile'),
+                child: const Text('Edit Profile'),
               ),
             ],
           ),
@@ -243,15 +243,15 @@ class _UserProfilePageState extends State<UserProfilePage> {
       child: Row(
         children: [
           Icon(icon, size: 20.0),
-          SizedBox(width: 16.0),
+          const SizedBox(width: 16.0),
           Text(
             label,
-            style: TextStyle(fontSize: 18.0),
+            style: const TextStyle(fontSize: 18.0),
           ),
-          SizedBox(width: 16.0),
+          const SizedBox(width: 16.0),
           Text(
             value,
-            style: TextStyle(fontSize: 18.0),
+            style: const TextStyle(fontSize: 18.0),
           ),
         ],
       ),

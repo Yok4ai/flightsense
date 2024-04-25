@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/RateReviewPage.dart'; // Import the RateReviewPage
 
 class BookingHistoryPage extends StatefulWidget {
+  const BookingHistoryPage({super.key});
+
   @override
   _BookingHistoryPageState createState() => _BookingHistoryPageState();
 }
@@ -22,7 +24,7 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
     await Firebase.initializeApp();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
-    final String? userEmail = user != null ? user.email : null;
+    final String? userEmail = user?.email;
 
     setState(() {
       // Query Firestore to get bookings associated with the current user's email
@@ -33,17 +35,28 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
     });
   }
 
+  String _formatTimestamp(Timestamp timestamp) {
+  var date = timestamp.toDate();
+  return '${date.day}/${date.month}/${date.year} ${_formatTime(date.hour, date.minute)}';
+}
+
+String _formatTime(int hour, int minute) {
+  String hourStr = hour.toString().padLeft(2, '0');
+  String minuteStr = minute.toString().padLeft(2, '0');
+  return '$hourStr:$minuteStr';
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Booking History'),
+        title: const Text('Booking History'),
       ),
       body: FutureBuilder<QuerySnapshot>(
         future: bookingData,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -53,63 +66,120 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
             );
           }
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No bookings found.'),
             );
           }
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) {
-              var booking = snapshot.data!.docs[index];
-              return FutureBuilder<DocumentSnapshot>(
-                future: FirebaseFirestore.instance
-                    .collection('bookings')
-                    .doc(booking.id)
-                    .get(),
-                builder: (context, bookingSnapshot) {
-                  if (bookingSnapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (bookingSnapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${bookingSnapshot.error}'),
-                    );
-                  }
-                  if (!bookingSnapshot.hasData) {
-                    return Center(
-                      child: Text('Booking data not found.'),
-                    );
-                  }
-                  var bookingData = bookingSnapshot.data!;
-                  return ListTile(
-                    title: Text(bookingData['airline']),
-                    subtitle: Text(
-                        'From: ${bookingData['from']} To: ${bookingData['to']}'),
-                    trailing: IconButton(
-                      icon: Icon(Icons.rate_review),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => RateReviewPage(
-                              bookingId: booking.id,
-                              airline: bookingData['airline'],
-                              from: bookingData['from'],
-                              to: bookingData['to'],
-                              price: bookingData['price'],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+
+
+
+ return ListView.builder(
+  itemCount: snapshot.data!.docs.length,
+  itemBuilder: (context, index) {
+    var booking = snapshot.data!.docs[index];
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('bookings')
+          .where('code', isEqualTo: booking['code'])
+          .where('payment_status', isEqualTo: 'Paid')
+          // .where('user_email', isEqualTo: booking['user_email'])
+          .snapshots(),
+      builder: (context, bookingSnapshot) {
+        if (bookingSnapshot.connectionState ==
+            ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (bookingSnapshot.hasError) {
+          return Center(
+            child: Text('Error: ${bookingSnapshot.error}'),
+          );
+        }
+        if (bookingSnapshot.data == null ||
+            bookingSnapshot.data!.docs.isEmpty) {
+          // If no documents match the query, display disabled ListTile
+          return ListTile(
+            title: Text(
+              booking['airline'],
+              style: TextStyle(color: Colors.grey), // Gray out the text
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'From: ${booking['from']} To: ${booking['to']}',
+                  style: TextStyle(color: Colors.grey), // Gray out the text
+                ),
+                Text(
+                  'Flight Code: ${booking['code']}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey, // Gray out the text
+                  ),
+                ),
+                Text(
+                  'Booked on: ${_formatTimestamp(booking['timestamp'])}', // Display timestamp
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: Colors.grey, // Gray out the text
+                  ),
+                ),
+              ],
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.rate_review),
+              onPressed: null, // Disable onPressed
+            ),
+          );
+        }
+        // If documents match the query, allow review
+        var bookingData = bookingSnapshot.data!.docs[0];
+        return ListTile(
+          title: Text(booking['airline']),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'From: ${booking['from']} To: ${booking['to']}',
+              ),
+              Text(
+                'Flight Code: ${booking['code']}',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Booked on: ${_formatTimestamp(booking['timestamp'])}', // Display timestamp
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+          trailing: IconButton(
+            icon: const Icon(Icons.rate_review),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RateReviewPage(
+                    bookingId: booking.id,
+                    airline: booking['airline'],
+                    from: booking['from'],
+                    to: booking['to'],
+                    price: booking['price'],
+                  ),
+                ),
               );
             },
-          );
+          ),
+        );
+      },
+    );
+  },
+);
+
         },
       ),
     );

@@ -1,28 +1,36 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Authentication
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'BookingHistory.dart'; // Importing the BookingHistoryPage
+import 'Payment.dart';
 
 class BookingPage extends StatelessWidget {
   final List<dynamic> row;
 
-  BookingPage({required this.row});
+  const BookingPage({super.key, required this.row});
+
+      String generateBookingID() {
+      final Random random = Random();
+      return '${random.nextInt(10000000)}';
+      }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 111, 30, 241),
+      backgroundColor: const Color.fromARGB(255, 111, 30, 241),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        title: Text('Booking'),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        title: const Text('Booking'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Flight Details',
               style: TextStyle(
                 fontSize: 24.0,
@@ -30,15 +38,15 @@ class BookingPage extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             _buildFlightDetailsCard(),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Center(
               child: ElevatedButton(
                 onPressed: () {
                   _saveBookingToFirebase(row, context);
                 },
-                child: Text('Confirm Booking'),
+                child: const Text('Confirm Booking'),
               ),
             ),
           ],
@@ -82,14 +90,14 @@ class BookingPage extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16.0,
             ),
           ),
@@ -98,14 +106,16 @@ class BookingPage extends StatelessWidget {
     );
   }
 
-  Future<void> _saveBookingToFirebase(List<dynamic> bookingData, BuildContext context) async {
+  Future<void> _saveBookingToFirebase(
+      List<dynamic> bookingData, BuildContext context) async {
     await Firebase.initializeApp();
-    final CollectionReference bookings = FirebaseFirestore.instance.collection('bookings');
+    final CollectionReference bookings =
+        FirebaseFirestore.instance.collection('bookings');
     final FirebaseAuth auth = FirebaseAuth.instance;
-    
+
     // Get the currently logged-in user's email
     final User? user = auth.currentUser;
-    final String? userEmail = user != null ? user.email : null;
+    final String? userEmail = user?.email;
 
     await bookings.add({
       'airline': bookingData[1],
@@ -120,12 +130,24 @@ class BookingPage extends StatelessWidget {
       'price': bookingData[11],
       'user_email': userEmail, // Add the user's email to the booking data
       'timestamp': DateTime.now(),
+      'payment_status': 'Pending',
     });
 
-    // Navigate to BookingHistoryPage after saving booking
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => BookingHistoryPage()),
-    );
+    // // Navigate to BookingHistoryPage after saving booking
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => const BookingHistoryPage()),
+    // );
+
+      Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PaymentPage(
+                        paymentAmount: row[11].toDouble(),
+                        flightCode: row[2], // Pass the flight code as a parameter
+                      ),
+                    ),
+                  );
+
   }
 }

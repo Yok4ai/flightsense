@@ -3,11 +3,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/loginscreen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegScreen extends StatefulWidget {
-  const RegScreen({Key? key}) : super(key: key);
+  const RegScreen({super.key});
 
   @override
   State<RegScreen> createState() => _RegScreenState();

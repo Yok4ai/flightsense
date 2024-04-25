@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/BookingHistory.dart';
+import 'package:flightsense/PendingPayments.dart';
 import 'package:flightsense/ReviewsShow.dart';
 import 'package:flightsense/chat/ChatPage.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,9 @@ import 'package:flightsense/Listview.dart';
 import 'package:flightsense/Threads.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/loginscreen.dart';
-import 'package:flightsense/SearchPage.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.flight),
     const Icon(Icons.history),
     const Icon(Icons.reviews),
+    const Icon( Icons.payment),
     const Icon(Icons.logout), // Add settings icon
   ];
 
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => UserProfilePage(
+            builder: (context) => const UserProfilePage(
               profileImageUrl: 'assets/images/user.png',
               name: 'Shuvo',
               phoneNumber: '01866946299',
@@ -75,14 +76,14 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ChatPage()), // Navigate to SearchPage
+              builder: (context) => const ChatPage()), // Navigate to SearchPage
         );
         break;
       case 4:
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => CSVFlight()), // Navigate to CSVFlight
+              builder: (context) => const CSVFlight()), // Navigate to CSVFlight
         );
         break;
       case 5:
@@ -90,21 +91,27 @@ class _HomePageState extends State<HomePage> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  BookingHistoryPage()), // Navigate to CSVFlight
+                  const BookingHistoryPage()), // Navigate to CSVFlight
         );
         break;
       case 6:
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ReviewShowPage()), // Navigate to CSVFlight
+              builder: (context) => const ReviewShowPage()), // Navigate to CSVFlight
         );
         break;
-      case 7:
+        case 7:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PendingPayments()),
+        );
+        break;
+      case 8:
         FirebaseAuth.instance.signOut();
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
         );
         break;
       default:
@@ -150,40 +157,40 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.lightBlue.shade200,
       key: _scaffoldKey, // Assigning the GlobalKey to Scaffold
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150.0), // Set the preferred height
+        preferredSize: const Size.fromHeight(150.0), // Set the preferred height
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.lightBlue.shade900,
-              borderRadius: BorderRadius.all(Radius.circular(30)),
+              borderRadius: const BorderRadius.all(Radius.circular(30)),
             ),
             height: 300,
             child: Padding(
-              padding: EdgeInsets.only(left: 18, right: 18),
+              padding: const EdgeInsets.only(left: 18, right: 18),
               child: Row(
                 children: [
                   IconButton(
                     icon: const Icon(Icons.menu, color: Colors.white),
                     onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   FutureBuilder<String>(
                     future: _usernameFuture,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       } else if (snapshot.hasData) {
                         return Row(
                           children: [
                             Text(
                               '${snapshot.data}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             GestureDetector(
                               onTap: () => {
                                 Navigator.push(
@@ -191,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return UserProfilePage(
+                                      return const UserProfilePage(
                                         profileImageUrl:
                                             'assets/images/user.png',
                                         name: '',
@@ -204,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               },
-                              child: CircleAvatar(
+                              child: const CircleAvatar(
                                 radius: 25,
                                 backgroundImage:
                                     AssetImage('assets/images/user.png'),
@@ -213,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         );
                       } else {
-                        return Text('Error fetching username');
+                        return const Text('Error fetching username');
                       }
                     },
                   ),
@@ -286,8 +293,14 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 selected: _selectedIndex == 7,
                 leading: _navigationItems[7],
-                title: const Text('Sign Out'),
+                title: const Text('Pending Payments'),
                 onTap: () => _onItemTapped(7), // Handle settings tap (optional)
+              ),
+              ListTile(
+                selected: _selectedIndex == 8,
+                leading: _navigationItems[8],
+                title: const Text('Sign Out'),
+                onTap: () => _onItemTapped(8), // Handle settings tap (optional)
               ),
             ],
           ),
@@ -299,7 +312,7 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             decoration: BoxDecoration(
               color: Colors.lightBlue.shade900,
-              borderRadius: BorderRadius.all(Radius.circular(30)),
+              borderRadius: const BorderRadius.all(Radius.circular(30)),
             ),
             height: MediaQuery.of(context).size.height,
             child: Padding(
@@ -307,19 +320,19 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 20),
-                  Text('From',
+                  const SizedBox(height: 20),
+                  const Text('From',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.location_on, color: Colors.blue),
                         border: OutlineInputBorder(
@@ -328,19 +341,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text('To',
+                  const SizedBox(height: 20),
+                  const Text('To',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.send, color: Colors.blue),
                         border: OutlineInputBorder(
@@ -349,19 +362,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text('Date',
+                  const SizedBox(height: 20),
+                  const Text('Date',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                         prefixIcon:
                             Icon(Icons.calendar_today, color: Colors.blue),
@@ -371,7 +384,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   GestureDetector(
@@ -391,10 +404,10 @@ class _HomePageState extends State<HomePage> {
                         height: 55,
                         width: 200,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 26, 148, 255),
+                          color: const Color.fromARGB(255, 26, 148, 255),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "Search",
                             style: TextStyle(

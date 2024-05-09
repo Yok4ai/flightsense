@@ -7,6 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // Importing ChatRoom widget
 
 class ChatPage extends StatefulWidget {
+  const ChatPage({super.key});
+
   @override
   _ChatPageState createState() => _ChatPageState();
 }
@@ -19,7 +21,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('User List')),
+        title: const Center(child: Text('User List')),
       ),
       body: _buildBody(context),
     );
@@ -30,7 +32,7 @@ Widget _buildBody(BuildContext context) {
     stream: FirebaseFirestore.instance.collection('users').snapshots(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       } else if (snapshot.hasError) {

@@ -15,7 +15,7 @@ class MyPostButton extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.only(left: 10),
-        child: Center(
+        child: const Center(
           child: Icon(Icons.done, color: Colors.white,),
         ),
       ),

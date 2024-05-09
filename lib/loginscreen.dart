@@ -2,9 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/ForgetPasswordPage.dart';
 import 'package:flightsense/HomePage.dart';
-import 'package:flightsense/New_HomePage.dart';
-import 'package:flightsense/chat/ChatPage.dart';
-import 'package:flightsense/chat/ChatRoom.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -45,7 +42,7 @@ if (user != null) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => HomePage(),
+      builder: (context) => const HomePage(),
     ),
   );
 } else {
@@ -80,7 +77,7 @@ if (user != null) {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('OK'),
+            child: const Text('OK'),
           ),
         ],
       ),
@@ -114,7 +111,7 @@ if (user != null) {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return HomePage();
+          return const HomePage();
         },
       ),
     );
@@ -133,7 +130,7 @@ if (user != null) {
             decoration: const BoxDecoration(
               color: Color.fromARGB(255, 103, 57, 229),
             ),
-            child: Padding(
+            child: const Padding(
               padding: EdgeInsets.only(top: 60, left: 19),
               child: Text(
                 "Hello\nSign in!",
@@ -148,7 +145,7 @@ if (user != null) {
           Padding(
             padding: const EdgeInsets.only(top: 200.0),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -164,7 +161,7 @@ if (user != null) {
                   children: [
                     TextField(
                       controller: _emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         suffixIcon: Icon(
                           Icons.email,
                           color: Colors.grey,
@@ -183,7 +180,7 @@ if (user != null) {
                     TextField(
                       controller: _passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         suffixIcon: Icon(
                           Icons.visibility_off,
                           color: Colors.grey,
@@ -199,7 +196,7 @@ if (user != null) {
                         // hintText: "Password",
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
@@ -208,12 +205,12 @@ if (user != null) {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return ForgetPasswordPage();
+                                return const ForgetPasswordPage();
                               },
                             ),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Forgot Password?",
                           style: TextStyle(
                             color: Color.fromARGB(255, 103, 57, 229),
@@ -223,7 +220,7 @@ if (user != null) {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     GestureDetector(
                       onTap: () {
                         signIn();
@@ -232,10 +229,10 @@ if (user != null) {
                         height: 55,
                         width: 300,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 103, 57, 229),
+                          color: const Color.fromARGB(255, 103, 57, 229),
                           borderRadius: BorderRadius.circular(40),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             "SIGN IN",
                             style: TextStyle(
@@ -247,7 +244,7 @@ if (user != null) {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -258,7 +255,7 @@ if (user != null) {
                             fontSize: 15,
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         GestureDetector(
                           onTap: signInWithGoogle, // Call function on tap
                           child: Container(

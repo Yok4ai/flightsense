@@ -1,14 +1,11 @@
-import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flightsense/database/firestore.dart';
 import 'package:flightsense/mypostbutton.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class Threads extends StatelessWidget {
-  Threads({Key? key});
+  Threads({super.key});
 
   final FireStoreDatabase database = FireStoreDatabase();
 
@@ -28,7 +25,7 @@ class Threads extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[400],
       appBar: AppBar(
-        title: Center(child: Text("T H R E A D S")),
+        title: const Center(child: Text("T H R E A D S")),
         backgroundColor: Colors.blueGrey[700],
       ),
       body: Column(
@@ -39,7 +36,7 @@ class Threads extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Say Something",
                       border: OutlineInputBorder(),
                     ),
@@ -55,7 +52,7 @@ class Threads extends StatelessWidget {
             stream: database.getPostsStreams(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -105,7 +102,7 @@ class Threads extends StatelessWidget {
                           '$formattedDate $formattedTime $formattedTimeZone';
 
                       return ListTile(
-                        title: Text(message, style: TextStyle(fontWeight: FontWeight.bold)),
+                        title: Text(message, style: const TextStyle(fontWeight: FontWeight.bold)),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

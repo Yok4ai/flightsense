@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ReviewShowPage extends StatefulWidget {
+  const ReviewShowPage({super.key});
+
   @override
   _ReviewShowPageState createState() => _ReviewShowPageState();
 }
@@ -23,13 +25,13 @@ class _ReviewShowPageState extends State<ReviewShowPage> {
 
     Map<String, List<DocumentSnapshot>> reviews = {};
 
-    documents.forEach((review) {
+    for (var review in documents) {
       String airline = review['airline'];
       if (!reviews.containsKey(airline)) {
         reviews[airline] = [];
       }
       reviews[airline]!.add(review);
-    });
+    }
 
     List<String> airlines = reviews.keys.toList()
       ..sort(); // Sort airlines alphabetically
@@ -44,13 +46,13 @@ class _ReviewShowPageState extends State<ReviewShowPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reviews'),
+        title: const Text('Reviews'),
       ),
       body: FutureBuilder<List<String>>(
         future: _airlines,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -60,7 +62,7 @@ class _ReviewShowPageState extends State<ReviewShowPage> {
             );
           }
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No reviews found.'),
             );
           }
@@ -90,13 +92,13 @@ class _ReviewShowPageState extends State<ReviewShowPage> {
 class AirlineReviewsPage extends StatelessWidget {
   final List<DocumentSnapshot> reviews;
 
-  AirlineReviewsPage({required this.reviews});
+  const AirlineReviewsPage({super.key, required this.reviews});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Airline Reviews'),
+        title: const Text('Airline Reviews'),
       ),
       body: ListView.builder(
         itemCount: reviews.length,

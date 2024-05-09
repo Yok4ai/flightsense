@@ -19,7 +19,7 @@ class MyListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 23, 21, 27),
+      backgroundColor: const Color.fromARGB(255, 23, 21, 27),
       body: ListView.builder(
          itemCount: _posts.length,
          itemBuilder: (context,index){

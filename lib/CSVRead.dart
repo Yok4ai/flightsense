@@ -1,14 +1,13 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 
 
 
 
 class CSVRead extends StatefulWidget {
-  const CSVRead({Key? key}) : super(key: key);
+  const CSVRead({super.key});
 
   @override
   _CSVReadState createState() => _CSVReadState();
@@ -18,11 +17,11 @@ class _CSVReadState extends State<CSVRead> {
   List<List<dynamic>> _data = [];
 
   void _loadCSV() async {
-    final _rawData = await rootBundle.loadString("assets/data.csv");
+    final rawData = await rootBundle.loadString("assets/data.csv");
     List<List<dynamic>> listData =
-    const CsvToListConverter().convert(_rawData);
+    const CsvToListConverter().convert(rawData);
 
-    int _currentIndex = 0;
+    int currentIndex = 0;
 
 
     setState(() {
@@ -34,7 +33,7 @@ class _CSVReadState extends State<CSVRead> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("FlightSense"),
+        title: const Text("FlightSense"),
       ),
       body: ListView.builder(
         itemCount: _data.length,
@@ -58,7 +57,8 @@ class _CSVReadState extends State<CSVRead> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add), onPressed: _loadCSV),
+          onPressed: _loadCSV,
+          child: const Icon(Icons.add)),
       // Display the contents from the CSV file
     );
   }

@@ -9,7 +9,7 @@ class RateReviewPage extends StatefulWidget {
   final String to; // Added to parameter
   final int price; // Added price parameter
 
-  RateReviewPage({
+  const RateReviewPage({super.key, 
     required this.bookingId,
     required this.airline,
     required this.from,
@@ -56,23 +56,23 @@ class _RateReviewPageState extends State<RateReviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flight Review'),
+        title: const Text('Flight Review'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Rate your flight experience:',
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             // Rating stars
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.star),
+                  icon: const Icon(Icons.star),
                   onPressed: () {
                     setState(() {
                       _rating = 1;
@@ -81,7 +81,7 @@ class _RateReviewPageState extends State<RateReviewPage> {
                   color: _rating >= 1 ? Colors.orange : Colors.grey,
                 ),
                 IconButton(
-                  icon: Icon(Icons.star),
+                  icon: const Icon(Icons.star),
                   onPressed: () {
                     setState(() {
                       _rating = 2;
@@ -90,7 +90,7 @@ class _RateReviewPageState extends State<RateReviewPage> {
                   color: _rating >= 2 ? Colors.orange : Colors.grey,
                 ),
                 IconButton(
-                  icon: Icon(Icons.star),
+                  icon: const Icon(Icons.star),
                   onPressed: () {
                     setState(() {
                       _rating = 3;
@@ -99,7 +99,7 @@ class _RateReviewPageState extends State<RateReviewPage> {
                   color: _rating >= 3 ? Colors.orange : Colors.grey,
                 ),
                 IconButton(
-                  icon: Icon(Icons.star),
+                  icon: const Icon(Icons.star),
                   onPressed: () {
                     setState(() {
                       _rating = 4;
@@ -108,7 +108,7 @@ class _RateReviewPageState extends State<RateReviewPage> {
                   color: _rating >= 4 ? Colors.orange : Colors.grey,
                 ),
                 IconButton(
-                  icon: Icon(Icons.star),
+                  icon: const Icon(Icons.star),
                   onPressed: () {
                     setState(() {
                       _rating = 5;
@@ -118,7 +118,7 @@ class _RateReviewPageState extends State<RateReviewPage> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Review text field
             TextField(
               onChanged: (value) {
@@ -127,12 +127,12 @@ class _RateReviewPageState extends State<RateReviewPage> {
                 });
               },
               maxLines: 4,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Write your review here...',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Submit button
             ElevatedButton(
               onPressed: () {
@@ -142,21 +142,21 @@ class _RateReviewPageState extends State<RateReviewPage> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Review Submitted'),
-                      content: Text('Thank you for your feedback!'),
+                      title: const Text('Review Submitted'),
+                      content: const Text('Thank you for your feedback!'),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('OK'),
+                          child: const Text('OK'),
                         ),
                       ],
                     );
                   },
                 );
               },
-              child: Text('Submit Review'),
+              child: const Text('Submit Review'),
             ),
           ],
         ),

@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class splashscreen extends StatelessWidget {
-  const splashscreen({Key? key});
+  const splashscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class splashscreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           // Loading animation using flutter_spinkit
-          SpinKitWave(
+          const SpinKitWave(
             color: Colors.white,
             size: 50.0,
           ),

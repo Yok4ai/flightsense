@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
         case 7:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PendingPayments()),
+          MaterialPageRoute(builder: (context) => const PendingPayments()),
         );
         break;
       case 8:

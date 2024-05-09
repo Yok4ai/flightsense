@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class RealtimeSearchPage extends StatefulWidget {
+  const RealtimeSearchPage({super.key});
+
   @override
   _RealtimeSearchPageState createState() => _RealtimeSearchPageState();
 }
 
 class _RealtimeSearchPageState extends State<RealtimeSearchPage> {
-  TextEditingController _departureController = TextEditingController();
-  TextEditingController _destinationController = TextEditingController();
-  TextEditingController _departureDateController = TextEditingController();
-  TextEditingController _returnDateController = TextEditingController();
+  final TextEditingController _departureController = TextEditingController();
+  final TextEditingController _destinationController = TextEditingController();
+  final TextEditingController _departureDateController = TextEditingController();
+  final TextEditingController _returnDateController = TextEditingController();
   bool _isEconomy = true; // Default to Economy class
   List<Map<String, dynamic>> _flightData = []; // Store retrieved flight data
   bool _showSearchOptions = true; // Control whether to show search options
@@ -68,7 +70,7 @@ class _RealtimeSearchPageState extends State<RealtimeSearchPage> {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverAppBar(
+          const SliverAppBar(
             pinned: true,
             expandedHeight: 200.0,
             flexibleSpace: FlexibleSpaceBar(
@@ -79,29 +81,29 @@ class _RealtimeSearchPageState extends State<RealtimeSearchPage> {
             delegate: SliverChildListDelegate(
               [
                 Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       TextField(
                         controller: _departureController,
-                        decoration: InputDecoration(labelText: 'Departure City'),
+                        decoration: const InputDecoration(labelText: 'Departure City'),
                       ),
                       TextField(
                         controller: _destinationController,
-                        decoration: InputDecoration(labelText: 'Destination City'),
+                        decoration: const InputDecoration(labelText: 'Destination City'),
                       ),
                       TextField(
                         controller: _departureDateController,
-                        decoration: InputDecoration(labelText: 'Departure Date (YYYY-MM-DD)'),
+                        decoration: const InputDecoration(labelText: 'Departure Date (YYYY-MM-DD)'),
                       ),
                       TextField(
                         controller: _returnDateController,
-                        decoration: InputDecoration(labelText: 'Return Date (YYYY-MM-DD)'),
+                        decoration: const InputDecoration(labelText: 'Return Date (YYYY-MM-DD)'),
                       ),
                       Row(
                         children: [
-                          Text('Economy Class'),
+                          const Text('Economy Class'),
                           Switch(
                             value: _isEconomy,
                             onChanged: (value) {
@@ -110,25 +112,25 @@ class _RealtimeSearchPageState extends State<RealtimeSearchPage> {
                               });
                             },
                           ),
-                          Text('Premium Class'),
+                          const Text('Premium Class'),
                         ],
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       ElevatedButton(
                         onPressed: _realtimeSearch,
-                        child: Text('Search Flights'),
+                        child: const Text('Search Flights'),
                       ),
                     ],
                   ),
                 ),
                 _showSearchOptions
-                    ? SizedBox() // If search options are shown, show an empty SizedBox
+                    ? const SizedBox() // If search options are shown, show an empty SizedBox
                     : Expanded(
                         child: _flightData.isEmpty
-                            ? Center(child: Text('No flight data available'))
+                            ? const Center(child: Text('No flight data available'))
                             : ListView.builder(
                                 shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: _flightData.length,
                                 itemBuilder: (context, index) {
                                   final flight = _flightData[index];
@@ -150,7 +152,7 @@ class _RealtimeSearchPageState extends State<RealtimeSearchPage> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: RealtimeSearchPage(),
   ));
 }

@@ -102,33 +102,33 @@ String _formatTime(int hour, int minute) {
           return ListTile(
             title: Text(
               booking['airline'],
-              style: TextStyle(color: Colors.grey), // Gray out the text
+              style: const TextStyle(color: Colors.grey), // Gray out the text
             ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'From: ${booking['from']} To: ${booking['to']}',
-                  style: TextStyle(color: Colors.grey), // Gray out the text
+                  style: const TextStyle(color: Colors.grey), // Gray out the text
                 ),
                 Text(
                   'Flight Code: ${booking['code']}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.grey, // Gray out the text
                   ),
                 ),
                 Text(
                   'Booked on: ${_formatTimestamp(booking['timestamp'])}', // Display timestamp
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: Colors.grey, // Gray out the text
                   ),
                 ),
               ],
             ),
-            trailing: IconButton(
-              icon: const Icon(Icons.rate_review),
+            trailing: const IconButton(
+              icon: Icon(Icons.rate_review),
               onPressed: null, // Disable onPressed
             ),
           );
@@ -145,13 +145,13 @@ String _formatTime(int hour, int minute) {
               ),
               Text(
                 'Flight Code: ${booking['code']}',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 'Booked on: ${_formatTimestamp(booking['timestamp'])}', // Display timestamp
-                style: TextStyle(
+                style: const TextStyle(
                   fontStyle: FontStyle.italic,
                 ),
               ),

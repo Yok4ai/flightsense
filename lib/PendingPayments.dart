@@ -8,6 +8,8 @@ import 'package:flutter_sslcommerz/model/SSLCurrencyType.dart';
 import 'package:flutter_sslcommerz/sslcommerz.dart';
 
 class PendingPayments extends StatefulWidget {
+  const PendingPayments({super.key});
+
   @override
   _PendingPaymentsState createState() => _PendingPaymentsState();
 }
@@ -40,7 +42,7 @@ class _PendingPaymentsState extends State<PendingPayments> {
         .where('code', isEqualTo: flightCode)
         .get()
         .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      for (var doc in querySnapshot.docs) {
         // Update the payment_status field for the found document
         doc.reference.update({'payment_status': 'Paid'}).then((_) {
           // Show the dialog only after successfully updating the payment status
@@ -70,7 +72,7 @@ class _PendingPaymentsState extends State<PendingPayments> {
         }).catchError((error) {
           print("Failed to update payment status: $error");
         });
-      });
+      }
     }).catchError((error) => print("Failed to fetch booking details: $error"));
   }
 
@@ -83,7 +85,7 @@ class _PendingPaymentsState extends State<PendingPayments> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pending Payments'),
+        title: const Text('Pending Payments'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -92,7 +94,7 @@ class _PendingPaymentsState extends State<PendingPayments> {
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           return ListView.builder(
             itemCount: snapshot.data?.docs.length,
@@ -115,7 +117,7 @@ class _PendingPaymentsState extends State<PendingPayments> {
                         double paymentAmount = document['price'].toDouble();
                         _initiatePayment(flightCode, paymentAmount);
                       },
-                      child: Text('Pay Now'),
+                      child: const Text('Pay Now'),
                     ),
                   ],
                 ),

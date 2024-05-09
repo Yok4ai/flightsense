@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 import 'sidebar.dart'; // Import the Sidebar class
 
 class NewsFeed extends StatefulWidget {
+  const NewsFeed({super.key});
+
   @override
   _NewsFeedState createState() => _NewsFeedState();
 }
@@ -16,7 +18,7 @@ class _NewsFeedState extends State<NewsFeed> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
   late String _userEmail; // Store the current user's email
-  TextEditingController _captionController = TextEditingController(); // Controller for caption text field
+  final TextEditingController _captionController = TextEditingController(); // Controller for caption text field
 
   @override
   void initState() {
@@ -46,11 +48,11 @@ class _NewsFeedState extends State<NewsFeed> {
     if (_imageFile == null) return;
 
     try {
-      final FirebaseStorage _storage = FirebaseStorage.instance;
-      final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+      final FirebaseStorage storage = FirebaseStorage.instance;
+      final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
       final String fileName = '${DateTime.now().millisecondsSinceEpoch}.${_imageFile!.path.split('.').last}';
-      final Reference ref = _storage.ref().child('images/$fileName');
+      final Reference ref = storage.ref().child('images/$fileName');
 
       final UploadTask uploadTask = ref.putFile(_imageFile!);
       final TaskSnapshot downloadUrl = await uploadTask;
@@ -66,7 +68,7 @@ class _NewsFeedState extends State<NewsFeed> {
         'timestamp': DateTime.now(),
       };
 
-      await _firestore.collection('images').add(imageData);
+      await firestore.collection('images').add(imageData);
 
       setState(() {
         _imageFile = null;
@@ -74,7 +76,7 @@ class _NewsFeedState extends State<NewsFeed> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Image uploaded successfully!'),
         ),
       );
@@ -92,9 +94,9 @@ Widget build(BuildContext context) {
   return Scaffold(
 
     appBar: AppBar(
-      title: Text('User Feed'),
+      title: const Text('User Feed'),
     ),
-    drawer: Sidebar(),
+    drawer: const Sidebar(),
     body: Column(
       children: [
         Expanded(
@@ -102,7 +104,7 @@ Widget build(BuildContext context) {
             stream: _imageStream,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
@@ -115,7 +117,7 @@ Widget build(BuildContext context) {
                   final imageUrl = images[index].get('imageUrl');
                   final caption = images[index].get('caption');
                   return Container(
-                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.grey[300]!,
@@ -127,20 +129,20 @@ Widget build(BuildContext context) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 _userEmail, // Use the stored user's email
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(height: 5), // Add some vertical space between the email and the date
+                              const SizedBox(height: 5), // Add some vertical space between the email and the date
                               Text(
                                 'Posted on ${DateTime.now().toString()}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.grey,
                                 ),
                               ),
@@ -149,10 +151,10 @@ Widget build(BuildContext context) {
                         ),
                         if (caption != null && caption.isNotEmpty) // Display caption if available
                           Padding(
-                            padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0), // Adjust horizontal padding here
+                            padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0), // Adjust horizontal padding here
                             child: Text(
                               caption,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontStyle: FontStyle.italic,
                               ),
                             ),
@@ -167,29 +169,29 @@ Widget build(BuildContext context) {
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: TextField(
                   controller: _captionController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter caption...',
                   ),
                 ),
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
               ElevatedButton(
                 onPressed: () {
                   _uploadImage();
                 },
-                child: Text('Choose Image'),
+                child: const Text('Choose Image'),
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
               FloatingActionButton(
                 onPressed: _postImage,
-                child: Icon(Icons.send),
+                child: const Icon(Icons.send),
               ),
             ],
           ),

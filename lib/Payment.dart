@@ -45,10 +45,10 @@ void _showPaymentCompleteDialog() {
     .where('code', isEqualTo: widget.flightCode) // Use the received flight code
     .get()
     .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      for (var doc in querySnapshot.docs) {
         // Update the payment_status field for the found document
         doc.reference.update({'payment_status': 'Paid'});
-      });
+      }
     })
     .catchError((error) => print("Failed to update payment status: $error"));
 
@@ -89,18 +89,18 @@ String _generateUniqueTransactionId() {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment Page'),
+        title: const Text('Payment Page'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedContainer(
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
               curve: Curves.easeInOut,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 97, 3, 250),
+                color: const Color.fromARGB(255, 97, 3, 250),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(

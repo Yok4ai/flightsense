@@ -37,21 +37,19 @@ dependencies:
   cupertino_icons: ^1.0.6
   animated_splash_screen: ^1.1.8
   firebase_auth: ^4.17.9
+  http: 1.2.1
   cloud_firestore: ^4.15.9
   image_picker: ^1.0.7
   google_sign_in: ^6.2.1
   intl: ^0.19.0
-  google_maps_flutter: ^2.6.1
-  http: ^0.13.4
-  flutter_polyline_points: ^1.0.0
 
 
   firebase_core: any
   page_transition: any
   flutter_spinkit: ^5.2.1
   csv: ^6.0.0
-  flutter_sslcommerz: ^2.2.2-nullsafety.0
   firebase_storage: ^11.7.5
+  flutter_sslcommerz: ^2.2.2-nullsafety.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -82,7 +80,6 @@ flutter:
     - assets/economy.csv
     - assets/images/download.png
     - assets/images/user.png
-    - assets/images/tt.jpg
 
 
   # To add assets to your application, add an assets section, like this:

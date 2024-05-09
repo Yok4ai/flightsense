@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/Users/Shuvo/Documents/GitHub/flightsense/windows/flutter"
+    "cmake.sourceDirectory": "C:/Users/Shuvo/Documents/GitHub/flightsense/windows/flutter",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

@@ -1,6 +1,15 @@
 import 'package:flightsense/HomePage.dart';
+<<<<<<< HEAD
+import 'package:flightsense/Listview.dart';
+//import 'package:flightsense/Map/Map.dart';
+import 'package:flightsense/New_HomePage.dart';
+import 'package:flightsense/RateReviewPage.dart';
+import 'package:flightsense/UserProfilePage.dart';
+import 'package:flightsense/chat/ChatPage.dart';
+=======
 import 'package:flightsense/Payment.dart';
 import 'package:flightsense/PendingPayments.dart';
+>>>>>>> 5c08859b99b899acd8b43de38e0db8e5e10c4085
 import 'package:flightsense/firebase_options.dart';
 import 'package:flightsense/newsfeed/newsFeed.dart';
 import 'package:flightsense/newsfeed/sidebar.dart';

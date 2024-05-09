@@ -1,0 +1,101 @@
+Price,Airline,Duration,Flight Class,Flight Stops,City
+$414,IndiGo,6:15 pm – 4:45 am+1,Economy,1 stop,DAC-KUL
+$403,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$343,"IndiGo, AirAsia",5:15 pm – 7:15 am+1,Economy,1 stop,DAC-KUL
+$549,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$403,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$407,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$411,Malaysia Airlines,12:15 pm – 6:20 pm,"Economy, Super Saver",nonstop,DAC-KUL
+$411,Malaysia Airlines,2:05 am – 8:00 am,"Economy, Super Saver",nonstop,DAC-KUL
+$566,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$522,US-Bangla Airlines,10:50 am – 4:30 pm,"Economy, Super Saver",nonstop,DAC-KUL
+$485,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$405,AirAsia,4:40 am – 10:35 am,"Economy, Super Saver",nonstop,DAC-KUL
+$566,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$676,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$414,IndiGo,6:15 pm – 4:45 am+1,Economy,1 stop,DAC-KUL
+$403,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$343,"IndiGo, AirAsia",5:15 pm – 7:15 am+1,Economy,1 stop,DAC-KUL
+$549,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$403,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$407,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$411,Malaysia Airlines,12:15 pm – 6:20 pm,"Economy, Super Saver",nonstop,DAC-KUL
+$411,Malaysia Airlines,2:05 am – 8:00 am,"Economy, Super Saver",nonstop,DAC-KUL
+$566,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$522,US-Bangla Airlines,10:50 am – 4:30 pm,"Economy, Super Saver",nonstop,DAC-KUL
+$485,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$405,AirAsia,4:40 am – 10:35 am,"Economy, Super Saver",nonstop,DAC-KUL
+$566,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$676,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$510,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$672,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$402,IndiGo,6:15 pm – 4:45 am+1,Economy,1 stop,DAC-KUL
+$555,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$560,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$672,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$692,Biman Bangladesh,8:00 pm – 1:55 am+1,"Economy, Super Saver",nonstop,DAC-KUL
+$555,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$455,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$474,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$487,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$680,Biman Bangladesh,8:00 pm – 1:55 am+1,Economy,nonstop,DAC-KUL
+"$1,118",Biman Bangladesh,8:00 pm – 1:55 am+1,Mixed,nonstop,DAC-KUL
+$572,Thai Airways,2:45 am – 12:15 pm,Economy,1 stop,DAC-KUL
+$842,Biman Bangladesh,8:00 pm – 1:55 am+1,Economy,nonstop,DAC-KUL
+$414,IndiGo,6:15 pm – 4:45 am+1,Economy,1 stop,DAC-KUL
+$403,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$343,"IndiGo, AirAsia",5:15 pm – 7:15 am+1,Economy,1 stop,DAC-KUL
+$549,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$403,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$407,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$549,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$411,Malaysia Airlines,12:15 pm – 6:20 pm,"Economy, Super Saver",nonstop,DAC-KUL
+$411,Malaysia Airlines,2:05 am – 8:00 am,"Economy, Super Saver",nonstop,DAC-KUL
+$566,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$522,US-Bangla Airlines,10:50 am – 4:30 pm,"Economy, Super Saver",nonstop,DAC-KUL
+$485,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$405,AirAsia,4:40 am – 10:35 am,"Economy, Super Saver",nonstop,DAC-KUL
+$566,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$676,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$510,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$672,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$402,IndiGo,6:15 pm – 4:45 am+1,Economy,1 stop,DAC-KUL
+$555,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$560,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$672,US-Bangla Airlines,10:50 am – 4:30 pm,Economy,nonstop,DAC-KUL
+$692,Biman Bangladesh,8:00 pm – 1:55 am+1,"Economy, Super Saver",nonstop,DAC-KUL
+$555,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$455,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$474,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$487,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$680,Biman Bangladesh,8:00 pm – 1:55 am+1,Economy,nonstop,DAC-KUL
+"$1,118",Biman Bangladesh,8:00 pm – 1:55 am+1,Mixed,nonstop,DAC-KUL
+$572,Thai Airways,2:45 am – 12:15 pm,Economy,1 stop,DAC-KUL
+$842,Biman Bangladesh,8:00 pm – 1:55 am+1,Economy,nonstop,DAC-KUL
+$847,Biman Bangladesh,8:00 pm – 1:55 am+1,Economy,nonstop,DAC-KUL
+$455,Malaysia Airlines,2:05 am – 8:00 am,Economy,nonstop,DAC-KUL
+$474,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$817,Biman Bangladesh,8:00 pm – 1:55 am+1,Economy,nonstop,DAC-KUL
+$842,Biman Bangladesh,8:00 pm – 1:55 am+1,Economy,nonstop,DAC-KUL
+$474,IndiGo,6:15 pm – 4:45 am+1,Economy,1 stop,DAC-KUL
+$594,Thai Airways,2:45 am – 12:15 pm,Economy,1 stop,DAC-KUL
+$409,"IndiGo, Batik Air",6:15 pm – 5:50 am+1,Economy,1 stop,DAC-KUL
+$795,Thai Airways,2:45 am – 12:15 pm,Economy,1 stop,DAC-KUL
+$487,AirAsia,4:40 am – 10:35 am,Economy,nonstop,DAC-KUL
+$494,China Southern,11:15 pm – 12:25 pm+1,Economy,1 stop,DAC-KUL
+$558,Thai Airways,2:45 am – 12:15 pm,"Economy, Super Saver",1 stop,DAC-KUL
+$346,"IndiGo, AirAsia",5:15 pm – 7:15 am+1,Economy,1 stop,DAC-KUL
+$561,IndiGo,6:15 pm – 4:45 am+1,Economy,1 stop,DAC-KUL
+$446,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$414,IndiGo,6:15 pm – 4:45 am+1,Economy,1 stop,DAC-KUL
+$403,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL
+$343,"IndiGo, AirAsia",5:15 pm – 7:15 am+1,Economy,1 stop,DAC-KUL
+$549,Malaysia Airlines,12:15 pm – 6:20 pm,Economy,nonstop,DAC-KUL

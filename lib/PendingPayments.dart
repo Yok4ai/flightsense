@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/BookingHistory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sslcommerz/model/SSLCSdkType.dart';
@@ -16,6 +17,7 @@ class PendingPayments extends StatefulWidget {
 
 class _PendingPaymentsState extends State<PendingPayments> {
   late Sslcommerz sslcommerz;
+  final User? _currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -91,6 +93,7 @@ class _PendingPaymentsState extends State<PendingPayments> {
         stream: FirebaseFirestore.instance
             .collection('bookings')
             .where('payment_status', isEqualTo: 'Pending')
+            .where('user_email', isEqualTo: _currentUser?.email)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {

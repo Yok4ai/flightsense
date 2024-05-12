@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/BookingHistory.dart';
-import 'package:flightsense/PendingPayments.dart';
+import 'package:flightsense/GroupChat.dart';
+import 'package:flightsense/Map.dart';
 import 'package:flightsense/ReviewsShow.dart';
 import 'package:flightsense/chat/ChatPage.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,10 @@ import 'package:flightsense/Listview.dart';
 import 'package:flightsense/Threads.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/loginscreen.dart';
+import 'package:flightsense/SearchPage.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -33,7 +35,8 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.flight),
     const Icon(Icons.history),
     const Icon(Icons.reviews),
-    const Icon( Icons.payment),
+    const Icon(Icons.map),
+    const Icon(Icons.people),
     const Icon(Icons.logout), // Add settings icon
   ];
 
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const UserProfilePage(
+            builder: (context) => UserProfilePage(
               profileImageUrl: 'assets/images/user.png',
               name: 'Shuvo',
               phoneNumber: '01866946299',
@@ -76,14 +79,14 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const ChatPage()), // Navigate to SearchPage
+              builder: (context) => ChatPage()), // Navigate to SearchPage
         );
-        break;
+        break; 
       case 4:
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const CSVFlight()), // Navigate to CSVFlight
+              builder: (context) => CSVFlight()), // Navigate to CSVFlight
         );
         break;
       case 5:
@@ -91,27 +94,35 @@ class _HomePageState extends State<HomePage> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  const BookingHistoryPage()), // Navigate to CSVFlight
+                  BookingHistoryPage()), // Navigate to CSVFlight
         );
         break;
       case 6:
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const ReviewShowPage()), // Navigate to CSVFlight
+              builder: (context) => ReviewShowPage()), // Navigate to CSVFlight
         );
         break;
-        case 7:
+      case 7:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const PendingPayments()),
+          MaterialPageRoute(
+              builder: (context) => MapSample()), // Navigate to CSVFlight
         );
         break;
-      case 8:
+        case 8:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => GroupChatPage()), // Navigate to CSVFlight
+        );
+        break;
+      case 9:
         FirebaseAuth.instance.signOut();
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
+          MaterialPageRoute(builder: (context) => LoginScreen()),
         );
         break;
       default:
@@ -157,40 +168,40 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.lightBlue.shade200,
       key: _scaffoldKey, // Assigning the GlobalKey to Scaffold
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(150.0), // Set the preferred height
+        preferredSize: Size.fromHeight(150.0), // Set the preferred height
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.lightBlue.shade900,
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
             height: 300,
             child: Padding(
-              padding: const EdgeInsets.only(left: 18, right: 18),
+              padding: EdgeInsets.only(left: 18, right: 18),
               child: Row(
                 children: [
                   IconButton(
                     icon: const Icon(Icons.menu, color: Colors.white),
                     onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   FutureBuilder<String>(
                     future: _usernameFuture,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
+                        return CircularProgressIndicator();
                       } else if (snapshot.hasData) {
                         return Row(
                           children: [
                             Text(
                               '${snapshot.data}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                             ),
-                            const SizedBox(width: 10),
+                            SizedBox(width: 10),
                             GestureDetector(
                               onTap: () => {
                                 Navigator.push(
@@ -198,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return const UserProfilePage(
+                                      return UserProfilePage(
                                         profileImageUrl:
                                             'assets/images/user.png',
                                         name: '',
@@ -211,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               },
-                              child: const CircleAvatar(
+                              child: CircleAvatar(
                                 radius: 25,
                                 backgroundImage:
                                     AssetImage('assets/images/user.png'),
@@ -220,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         );
                       } else {
-                        return const Text('Error fetching username');
+                        return Text('Error fetching username');
                       }
                     },
                   ),
@@ -293,14 +304,20 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 selected: _selectedIndex == 7,
                 leading: _navigationItems[7],
-                title: const Text('Pending Payments'),
+                title: const Text('Map'),
                 onTap: () => _onItemTapped(7), // Handle settings tap (optional)
               ),
               ListTile(
                 selected: _selectedIndex == 8,
                 leading: _navigationItems[8],
-                title: const Text('Sign Out'),
+                title: const Text('Group Chat'),
                 onTap: () => _onItemTapped(8), // Handle settings tap (optional)
+              ),
+              ListTile(
+                selected: _selectedIndex == 9,
+                leading: _navigationItems[9],
+                title: const Text('Sign Out'),
+                onTap: () => _onItemTapped(9), // Handle settings tap (optional)
               ),
             ],
           ),
@@ -312,7 +329,7 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             decoration: BoxDecoration(
               color: Colors.lightBlue.shade900,
-              borderRadius: const BorderRadius.all(Radius.circular(30)),
+              borderRadius: BorderRadius.all(Radius.circular(30)),
             ),
             height: MediaQuery.of(context).size.height,
             child: Padding(
@@ -320,19 +337,19 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
-                  const Text('From',
+                  SizedBox(height: 20),
+                  Text('From',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.location_on, color: Colors.blue),
                         border: OutlineInputBorder(
@@ -341,19 +358,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  const Text('To',
+                  SizedBox(height: 20),
+                  Text('To',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.send, color: Colors.blue),
                         border: OutlineInputBorder(
@@ -362,19 +379,19 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  const Text('Date',
+                  SizedBox(height: 20),
+                  Text('Date',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                           fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         prefixIcon:
                             Icon(Icons.calendar_today, color: Colors.blue),
@@ -384,7 +401,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 30,
                   ),
                   GestureDetector(
@@ -404,10 +421,10 @@ class _HomePageState extends State<HomePage> {
                         height: 55,
                         width: 200,
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 26, 148, 255),
+                          color: Color.fromARGB(255, 26, 148, 255),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
                             "Search",
                             style: TextStyle(

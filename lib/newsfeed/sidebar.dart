@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flightsense/GroupChat.dart';
 import 'package:flutter/material.dart';
 import 'package:flightsense/RealTimeSearch/realtimeSearch.dart';
 import 'package:flightsense/BookingHistory.dart';
@@ -8,6 +9,7 @@ import 'package:flightsense/ReviewsShow.dart';
 import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/chat/ChatPage.dart';
 import 'package:flightsense/loginscreen.dart';
+import 'package:flightsense/Map.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key});
@@ -58,6 +60,26 @@ class Sidebar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ChatPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.map),
+            title: const Text('Map'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MapSample()),
+              );
+            },
+          ),
+           ListTile(
+            leading: const Icon(Icons.group),
+            title: const Text('Group Chat'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GroupChatPage()),
               );
             },
           ),

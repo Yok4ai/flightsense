@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/whatever/Documents/flightsense/myscraper"
+VIRTUAL_ENV="/home/whatever/Desktop/myscraper"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

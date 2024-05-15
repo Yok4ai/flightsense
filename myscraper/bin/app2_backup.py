@@ -1,19 +1,21 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
 import csv
 
 try:
-    # Configure Chrome options to disable JavaScript
+
     chrome_options = Options()
-    chrome_options.add_argument("--disable-javascript")
+    # chrome_options.add_argument("--disable-javascript")
 
     # Instantiate the WebDriver object with the modified options
-    driver = webdriver.Chrome(options=chrome_options)
+    # driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Firefox()
     
     to_location = 'LCA'
-    url = "https://www.kayak.com/flights/DAC-KUL/2024-06-07/2024-06-14?sort=bestflight_a"
+    url = "https://www.kayak.com/flights/SYD-LIS/2024-06-07/2024-06-14?sort=bestflight_a"
 
     driver.get(url)
     # No need for sleep(5) as JavaScript is disabled
@@ -30,7 +32,7 @@ try:
 
     entry_counter = 0
 
-    while entry_counter < 100:
+    while entry_counter < 50:
         flight_rows = soup.find_all('div', class_='nrc6-inner')
 
         for row in flight_rows:
@@ -62,13 +64,13 @@ try:
             list_city.append(city)
 
             entry_counter += 1
-            if entry_counter == 100:
+            if entry_counter == 50:
                 break
 
         # Check if there's a "Show more" button
         show_more_button = driver.find_element("xpath", "//div[@class='ULvh-button show-more-button']")
         if not show_more_button.is_displayed():
-            break
+            time.sleep(3)
 
         # Click the "Show more" button and wait for results to load
         show_more_button.click()

@@ -25,7 +25,7 @@ def search_flights():
         driver.get(url)
 
         # Wait for page to load (adjust wait time as needed)
-        sleep(5)
+        sleep(20)
 
         # Loop until there are no more "Show More" buttons or a maximum number of iterations is reached (e.g., 5)
         max_iterations = 5
@@ -58,18 +58,20 @@ def search_flights():
                         "city": city.text.strip()
                     })
 
-            # Check if there's a "Show more" button
-            show_more_button = driver.find_element("xpath", "//div[@class='ULvh-button show-more-button']")
-            if not show_more_button.is_displayed():
-                break
+            # # Check if there's a "Show more" button
+            # show_more_button = driver.find_element("xpath", "//div[@class='ULvh-button show-more-button']")
+            # if not show_more_button.is_displayed():
+            #     break
 
-            # Click the "Show More" button and wait for results to load
-            show_more_button.click()
-            sleep(2)  # Wait for the new results to load
-            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            # # Click the "Show More" button and wait for results to load
+            # show_more_button.click()
+            # sleep(1)  # Wait for the new results to load
+            # soup = BeautifulSoup(driver.page_source, 'html.parser')
 
         # Close WebDriver
-        # driver.quit()
+        driver.quit()
+        
+
 
         return jsonify({"flights": flight_data})
 

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flightsense/newsfeed/commentspage.dart';
 import 'package:flightsense/newsfeed/likes.dart';
 import 'package:flightsense/newsfeed/locationservice.dart';
 import 'package:flutter/material.dart';
@@ -281,95 +282,124 @@ return ListView.builder(
     //                     ],
     //                   ),
     //                 );
-    return Container(
-  margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-  decoration: BoxDecoration(
-    border: Border.all(
-      color: Colors.grey[300]!,
-      width: 1.0,
+return GestureDetector(
+  onTap: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CommentsPage(imageId: documentId),
+      ),
+    );
+  },
+  child: Container(
+    margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: Colors.grey[300]!,
+        width: 1.0,
+      ),
+      borderRadius: BorderRadius.circular(10.0),
     ),
-    borderRadius: BorderRadius.circular(10.0),
-  ),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              userEmail,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              'Posted on ${images[index].get('timestamp').toDate().toString()}',
-              style: const TextStyle(
-                color: Colors.grey,
-              ),
-            ),
-            if (location != null)
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                'Location: $location',
+                userEmail,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                'Posted on ${images[index].get('timestamp').toDate().toString()}',
                 style: const TextStyle(
                   color: Colors.grey,
                 ),
               ),
-          ],
+              if (location != null)
+                Text(
+                  'Location: $location',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+            ],
+          ),
         ),
-      ),
-      if (caption != null && caption.isNotEmpty)
-        Padding(
-          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
-          child: Text(
-            caption,
-            style: const TextStyle(
-              fontStyle: FontStyle.italic,
+        if (caption != null && caption.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+            child: Text(
+              caption,
+              style: const TextStyle(
+                fontStyle: FontStyle.italic,
+              ),
             ),
           ),
-        ),
-      Image.network(imageUrl),
-      Row(
-        children: [
-          IconButton(
-            icon: Icon(Icons.favorite),
-            color: likes > 0 ? Colors.red : null,
-            onPressed: () {
-              _toggleLike(documentId);
-            },
-          ),
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection('images').doc(documentId).collection('likes').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return SizedBox();
-              } else {
-                final int likesCount = snapshot.data?.docs.length ?? 0;
-                return Text(
-                  'Likes: $likesCount',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: likes > 0 ? Colors.red : null,
-                  ),
-                );
-              }
-            },
-          ),
-          if (userEmail == _userEmail)
+        Image.network(imageUrl),
+        Row(
+          children: [
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: Icon(Icons.favorite),
+              color: likes > 0 ? Colors.red : null,
               onPressed: () {
-                _showConfirmDeleteDialog(documentId);
+                _toggleLike(documentId);
               },
             ),
-        ],
-      ),
-    ],
+            SizedBox(width: 8), // Adjust this width based on your preference
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('images')
+                  .doc(documentId)
+                  .collection('likes')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  final int likesCount = snapshot.data?.docs.length ?? 0;
+                  return Text(
+                    'Likes: $likesCount',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: likes > 0 ? Colors.red : null,
+                    ),
+                  );
+                }
+              },
+            ),
+            SizedBox(width: 16), // Add this SizedBox for spacing between like count and comments
+            Text(
+              'Comments', // Only show "Comments" text here
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
+            ),
+            if (userEmail == _userEmail)
+              IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  _showConfirmDeleteDialog(documentId);
+                },
+              ),
+          ],
+        ),
+      ],
+    ),
   ),
 );
+
+
+
+
+
+
 
                   },
                 );

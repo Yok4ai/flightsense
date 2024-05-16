@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/ForgetPasswordPage.dart';
 import 'package:flightsense/HomePage.dart';
+import 'package:flightsense/newsfeed/newsFeed.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -42,7 +43,7 @@ if (user != null) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => const HomePage(),
+      builder: (context) => const NewsFeed(),
     ),
   );
 } else {

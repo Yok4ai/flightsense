@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:flightsense/newsfeed/likes.dart';
+import 'package:flightsense/newsfeed/locationservice.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -21,11 +23,11 @@ class _NewsFeedState extends State<NewsFeed> {
   late String _userEmail; // Store the current user's email
   final TextEditingController _captionController =
       TextEditingController(); // Controller for caption text field
+  String _currentLocation = ''; // Store the current location
 
   @override
   void initState() {
     super.initState();
-    // _imageStream = FirebaseFirestore.instance.collection('images').snapshots();
     _imageStream = FirebaseFirestore.instance
         .collection('images')
         .orderBy('timestamp', descending: true)
@@ -56,44 +58,43 @@ class _NewsFeedState extends State<NewsFeed> {
   }
 
   // Function to show confirmation dialog before deleting
-void _showConfirmDeleteDialog(String documentId) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Confirm Delete'),
-        content: const Text('Are you sure you want to delete this post?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () async {
-              // Show a progress indicator dialog
-              final progressDialog = showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+  void _showConfirmDeleteDialog(String documentId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Delete'),
+          content: const Text('Are you sure you want to delete this post?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                // Show a progress indicator dialog
+                final progressDialog = showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
 
-              await Future.delayed(const Duration(seconds: 1));
-              Navigator.pop(context); // Close progress indicator dialog
+                await Future.delayed(const Duration(seconds: 1));
+                Navigator.pop(context); // Close progress indicator dialog
 
-              // Now close the confirmation dialog and delete
-              Navigator.pop(context); // Close confirmation dialog
-              _deletePost(documentId);
-            },
-            child: const Text('Delete'),
-          ),
-        ],
-      );
-    },
-  );
-}
-
+                // Now close the confirmation dialog and delete
+                Navigator.pop(context); // Close confirmation dialog
+                _deletePost(documentId);
+              },
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   Future<void> _postImage() async {
     if (_imageFile == null) return;
@@ -112,16 +113,15 @@ void _showConfirmDeleteDialog(String documentId) {
 
       final user = FirebaseAuth.instance.currentUser; // Get current user
       final String userEmail = user!.email!; // Get current user's email
+      
 
       final imageData = {
         'imageUrl': url,
-        'userEmail': userEmail, // Add user's email to the data
-        // 'caption': _captionController.text, // Add user's caption to the data
-        'caption': _captionController.text.isEmpty
-            ? ''
-            : _captionController
-                .text, // Add user's caption to the data or empty string if no caption
+        'userEmail': userEmail,
+        'caption':
+            _captionController.text.isEmpty ? '' : _captionController.text,
         'timestamp': DateTime.now(),
+        'location': _currentLocation.isNotEmpty ? _currentLocation : null,
       };
 
       await firestore.collection('images').add(imageData);
@@ -145,6 +145,39 @@ void _showConfirmDeleteDialog(String documentId) {
     }
   }
 
+  final LocationService _locationService = LocationService();
+
+  void fetchCurrentLocation() {
+    String currentLocation = _locationService.getCurrentLocation();
+    print('Current Location: $currentLocation');
+    setState(() {
+      _currentLocation = currentLocation;
+    });
+  }
+  
+//like button
+bool _isLiked = false;
+Future<void> _toggleLike(String imageId) async {
+  try {
+    setState(() {
+      _isLiked = !_isLiked;
+    });
+
+    if (_isLiked) {
+      await Likes.likeOrUnlikeImage(imageId);
+    } else {
+      // Unliking an image is handled in likeOrUnlikeImage method
+    }
+  } catch (error) {
+    print('Error toggling like: $error');
+  }
+}
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,80 +199,178 @@ void _showConfirmDeleteDialog(String documentId) {
                 }
                 final images = snapshot.data?.docs ?? [];
 
-                return ListView.builder(
-                  itemCount: images.length,
-                  itemBuilder: (context, index) {
-                    final imageUrl = images[index].get('imageUrl');
-                    final caption = images[index].get('caption');
-                    final userEmail = images[index].get(
-                        'userEmail'); // Retrieve user's email from Firestore
-                    final documentId = images[index]
-                        .id; // Get the document ID for the current post
+return ListView.builder(
+  itemCount: images.length,
+  itemBuilder: (context, index) {
+    final imageUrl = images[index].get('imageUrl');
+    final caption = images[index].get('caption');
+    final userEmail = images[index].get('userEmail');
+    final location = images[index].get('location');
+    final documentId = images[index].id;
 
-                    return Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 20.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey[300]!,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  userEmail, // Display user's email from Firestore
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Text(
-                                  'Posted on ${DateTime.now().toString()}',
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          if (caption != null && caption.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10.0, right: 10.0, bottom: 10.0),
-                              child: Text(
-                                caption,
-                                style: const TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ),
-                          Image.network(imageUrl),
-                          if (userEmail ==
-                              _userEmail) // Check if the post is from the current user
-                            const Icon(
-                              Icons.circle,
-                              color: Color.fromARGB(255, 122, 76, 175),
-                            ),
-                          if (userEmail ==
-                              _userEmail) // Check if the post is from the current user
-                            IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () {
-                                // Call the _showConfirmDeleteDialog function with the document ID
-                                _showConfirmDeleteDialog(documentId);
-                              },
-                            ),
-                        ],
-                      ),
-                    );
+    final Map<String, dynamic>? imageData = images[index].data() as Map<String, dynamic>?;
+    final int likes = imageData != null && imageData.containsKey('likes')
+        ? imageData['likes']
+        : 0;
+
+    // return Container(
+    //   margin: const EdgeInsets.symmetric(
+    //       vertical: 10.0, horizontal: 20.0),
+    //   decoration: BoxDecoration(
+    //     border: Border.all(
+    //       color: Colors.grey[300]!,
+    //       width: 1.0,
+    //     ),
+    //     borderRadius: BorderRadius.circular(10.0),
+    //   ),
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Padding(
+    //         padding: const EdgeInsets.all(10.0),
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+    //             Text(
+    //               userEmail,
+    //               style: const TextStyle(
+    //                 fontWeight: FontWeight.bold,
+    //               ),
+    //             ),
+    //             const SizedBox(height: 5),
+    //             Text(
+    //               'Posted on ${images[index].get('timestamp').toDate().toString()}',
+    //               style: const TextStyle(
+    //                 color: Colors.grey,
+    //               ),
+    //             ),
+    //             if (location != null)
+    //               Text(
+    //                 'Location: $location',
+    //                 style: const TextStyle(
+    //                   color: Colors.grey,
+    //                 ),
+    //               ),
+    //           ],
+    //         ),
+    //       ),
+    //       if (caption != null && caption.isNotEmpty)
+    //         Padding(
+    //           padding: const EdgeInsets.only(
+    //               left: 10.0, right: 10.0, bottom: 10.0),
+    //           child: Text(
+    //             caption,
+    //             style: const TextStyle(
+    //               fontStyle: FontStyle.italic,
+    //             ),
+    //           ),
+    //         ),
+    //       Image.network(imageUrl),
+    //       if (userEmail == _userEmail)
+    //         const Icon(
+    //           Icons.circle,
+    //           color: Color.fromARGB(255, 122, 76, 175),
+    //         ),
+    //       if (userEmail == _userEmail)
+    //         IconButton(
+    //           icon: const Icon(Icons.delete),
+    //           onPressed: () {
+    //             _showConfirmDeleteDialog(documentId);
+    //                           },
+    //                         ),
+    //                     ],
+    //                   ),
+    //                 );
+    return Container(
+  margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  decoration: BoxDecoration(
+    border: Border.all(
+      color: Colors.grey[300]!,
+      width: 1.0,
+    ),
+    borderRadius: BorderRadius.circular(10.0),
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              userEmail,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              'Posted on ${images[index].get('timestamp').toDate().toString()}',
+              style: const TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+            if (location != null)
+              Text(
+                'Location: $location',
+                style: const TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+          ],
+        ),
+      ),
+      if (caption != null && caption.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+          child: Text(
+            caption,
+            style: const TextStyle(
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ),
+      Image.network(imageUrl),
+      Row(
+        children: [
+          IconButton(
+            icon: Icon(Icons.favorite),
+            color: likes > 0 ? Colors.red : null,
+            onPressed: () {
+              _toggleLike(documentId);
+            },
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('images').doc(documentId).collection('likes').snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SizedBox();
+              } else {
+                final int likesCount = snapshot.data?.docs.length ?? 0;
+                return Text(
+                  'Likes: $likesCount',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: likes > 0 ? Colors.red : null,
+                  ),
+                );
+              }
+            },
+          ),
+          if (userEmail == _userEmail)
+            IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                _showConfirmDeleteDialog(documentId);
+              },
+            ),
+        ],
+      ),
+    ],
+  ),
+);
+
                   },
                 );
               },
@@ -267,7 +398,10 @@ void _showConfirmDeleteDialog(String documentId) {
                 ),
                 const SizedBox(width: 10.0),
                 FloatingActionButton(
-                  onPressed: _postImage,
+                  onPressed: () {
+                    fetchCurrentLocation(); // Call fetchCurrentLocation when posting image
+                    _postImage();
+                  },
                   child: const Icon(Icons.send),
                 ),
               ],

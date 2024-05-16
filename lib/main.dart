@@ -2,6 +2,7 @@
 import 'package:flightsense/HomePage.dart';
 import 'package:flightsense/firebase_options.dart';
 import 'package:flightsense/loginscreen.dart';
+import 'package:flightsense/newsfeed/location.dart';
 import 'package:flightsense/newsfeed/newsFeed.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Import Firebase core

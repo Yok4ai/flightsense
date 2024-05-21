@@ -1,141 +1,97 @@
 Price,Airline,Duration,Flight Class,Flight Stops,City
-$410,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$375,"Thai AirAsia, AirAsia X",1:55 pm – 8:00 pm+1,Economy,1 stop,DMK-SYD
-$430,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$691,Emirates,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$692,Qantas Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$571,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$409,Scoot,5:45 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$601,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$535,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$662,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$662,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$901,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$410,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$375,"Thai AirAsia, AirAsia X",1:55 pm – 8:00 pm+1,Economy,1 stop,DMK-SYD
-$684,Emirates,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$430,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$692,Qantas Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$693,Emirates,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$693,Qantas Airways,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$571,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$409,Scoot,5:45 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$601,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$535,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$847,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$410,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$375,"Thai AirAsia, AirAsia X",1:55 pm – 8:00 pm+1,Economy,1 stop,DMK-SYD
-$684,Emirates,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$430,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$692,Qantas Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$693,Emirates,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$693,Qantas Airways,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$571,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$409,Scoot,5:45 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$601,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$535,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$847,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$410,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$375,"Thai AirAsia, AirAsia X",1:55 pm – 8:00 pm+1,Economy,1 stop,DMK-SYD
-$684,Emirates,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$430,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$692,Qantas Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$693,Emirates,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$693,Qantas Airways,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$571,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$409,Scoot,5:45 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$601,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$535,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$847,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$797,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$797,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$535,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$830,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$601,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$830,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$662,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$662,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$889,Bangkok Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$919,Bangkok Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$919,Bangkok Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$706,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$499,"Vietravel Airlines, VietJet Air",4:10 pm – 7:20 am+1,Economy,1 stop,BKK-SYD
-$724,Qantas Airways,12:50 pm – 5:10 am+1,Economy,1 stop,BKK-SYD
-$611,Scoot,5:45 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$410,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$375,"Thai AirAsia, AirAsia X",1:55 pm – 8:00 pm+1,Economy,1 stop,DMK-SYD
-$684,Emirates,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$430,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$692,Qantas Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$693,Emirates,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$693,Qantas Airways,6:10 pm – 6:25 am+1,Eco Saver,nonstop,BKK-SYD
-$571,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$409,Scoot,5:45 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$632,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$669,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$601,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$535,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$847,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$797,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$797,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$535,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$830,Thai Airways,8:30 am – 8:30 pm,Economy,nonstop,BKK-SYD
-$601,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$830,Thai Airways,10:20 pm – 10:20 am+1,Economy,nonstop,BKK-SYD
-$662,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$662,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$889,Bangkok Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$919,Bangkok Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$919,Bangkok Airways,6:10 pm – 6:25 am+1,Economy,nonstop,BKK-SYD
-$706,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$499,"Vietravel Airlines, VietJet Air",4:10 pm – 7:20 am+1,Economy,1 stop,BKK-SYD
-$724,Qantas Airways,12:50 pm – 5:10 am+1,Economy Sale,1 stop,BKK-SYD
-$611,Scoot,5:45 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
-$456,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$724,Qantas Airways,12:50 pm – 5:10 am+1,Economy Sale,1 stop,BKK-SYD
-$696,Cathay Pacific,7:05 pm – 10:50 am+1,Economy Super Saver,1 stop,DMK-SYD
-$640,Cathay Pacific,7:00 pm – 10:50 am+1,Economy Light,1 stop,BKK-SYD
-$804,"Thai Airways, Qantas Airways",4:25 pm – 6:55 am+1,Economy Sale,1 stop,BKK-SYD
-$640,Cathay Pacific,7:00 pm – 10:50 am+1,Economy Light,1 stop,BKK-SYD
-$643,Thai AirAsia X,12:30 am – 1:10 pm,Economy Super Saver,nonstop,BKK-SYD
-$456,Thai AirAsia X,12:30 am – 1:10 pm,Economy,nonstop,BKK-SYD
-$565,Malaysia Airlines,2:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$696,Cathay Pacific,4:25 pm – 8:45 am+1,Economy Super Saver,1 stop,BKK-SYD
-$640,Cathay Pacific,4:25 pm – 8:45 am+1,Economy Light,1 stop,BKK-SYD
-$699,Qantas Airways,12:50 pm – 6:55 am+1,Economy Sale,1 stop,BKK-SYD
-$525,Philippine Airlines,1:30 pm – 8:45 am+1,Economy,1 stop,BKK-SYD
-$662,Thai AirAsia X,12:30 am – 1:10 pm,Economy Super Saver,nonstop,BKK-SYD
-$667,Cathay Pacific,7:05 pm – 10:50 am+1,Economy Light,1 stop,DMK-SYD
-$804,"Thai Airways, Qantas Airways",4:25 pm – 7:55 am+1,Economy Sale,1 stop,BKK-SYD
-$640,Cathay Pacific,4:25 pm – 8:45 am+1,Economy Light,1 stop,BKK-SYD
-$514,VietJet Air,1:50 pm – 7:20 am+1,Economy,1 stop,BKK-SYD
-$667,Cathay Pacific,7:05 pm – 10:50 am+1,Economy Light,1 stop,DMK-SYD
-$753,"Cathay Pacific, Qantas Airways",11:55 am – 5:10 am+1,"Economy Super Saver, Economy Sale",1 stop,BKK-SYD
-$640,Cathay Pacific,5:30 pm – 10:50 am+1,Economy Light,1 stop,BKK-SYD
-$828,"Thai Airways, Qantas Airways",1:50 pm – 5:10 am+1,Economy Sale,1 stop,BKK-SYD
-$680,Malaysia Airlines,5:15 pm – 10:00 am+1,Economy,1 stop,BKK-SYD
-$701,Qantas Airways,12:50 pm – 7:55 am+1,Economy Sale,1 stop,BKK-SYD
-$640,Cathay Pacific,5:30 pm – 10:50 am+1,Economy Light,1 stop,BKK-SYD
-$723,VietJet Air,1:50 pm – 7:20 am+1,Economy,1 stop,BKK-SYD
-$640,Cathay Pacific,3:00 pm – 8:45 am+1,Economy Light,1 stop,BKK-SYD
-$851,Cathay Pacific,7:05 pm – 10:50 am+1,Economy Super Saver,1 stop,DMK-SYD
-$640,Cathay Pacific,12:30 pm – 6:15 am+1,Economy Light,1 stop,BKK-SYD
-$490,Scoot,8:25 pm – 11:35 am+1,Economy,1 stop,BKK-SYD
+$478,Vistara,7:55 pm – 9:15 am+1,Economy,1 stop,JAI-SIN
+$415,IndiGo,5:25 am – 4:30 am+1,Economy,1 stop,JAI-SIN
+$476,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$510,Vistara,6:30 am – 8:20 pm,Economy,1 stop,JAI-SIN
+$467,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$489,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$457,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$466,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$448,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$523,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$513,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$450,IndiGo,11:50 am – 4:30 am+1,Economy,1 stop,JAI-SIN
+$555,"Air India Express, Air India",9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$457,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$503,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$551,"AirAsia, Malaysia Airlines",10:10 pm – 9:05 am+1,Economy,1 stop,JAI-SIN
+$478,Vistara,7:55 pm – 9:15 am+1,Economy,1 stop,JAI-SIN
+$391,IndiGo,5:25 am – 4:30 am+1,Economy,1 stop,JAI-SIN
+$472,Vistara,6:30 am – 8:20 pm,Economy,1 stop,JAI-SIN
+$476,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$572,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$467,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$489,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$457,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$466,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$522,AirAsia,10:10 pm – 9:50 am+1,Economy,1 stop,JAI-SIN
+$448,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$594,Air India,5:55 pm – 7:50 am+1,Economy,1 stop,JAI-SIN
+$543,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$577,AirAsia,10:10 pm – 9:50 am+1,Economy,1 stop,JAI-SIN
+$523,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$711,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$478,Vistara,7:55 pm – 9:15 am+1,Economy,1 stop,JAI-SIN
+$391,IndiGo,5:25 am – 4:30 am+1,Economy,1 stop,JAI-SIN
+$472,Vistara,6:30 am – 8:20 pm,Economy,1 stop,JAI-SIN
+$476,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$572,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$467,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$489,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$457,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$466,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$522,AirAsia,10:10 pm – 9:50 am+1,Economy,1 stop,JAI-SIN
+$448,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$594,Air India,5:55 pm – 7:50 am+1,Economy,1 stop,JAI-SIN
+$543,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$577,AirAsia,10:10 pm – 9:50 am+1,Economy,1 stop,JAI-SIN
+$523,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$711,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$478,Vistara,7:55 pm – 9:15 am+1,Economy,1 stop,JAI-SIN
+$391,IndiGo,5:25 am – 4:30 am+1,Economy,1 stop,JAI-SIN
+$472,Vistara,6:30 am – 8:20 pm,Economy,1 stop,JAI-SIN
+$476,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$572,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$467,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$489,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$457,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$466,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$522,AirAsia,10:10 pm – 9:50 am+1,Economy,1 stop,JAI-SIN
+$448,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$594,Air India,5:55 pm – 7:50 am+1,Economy,1 stop,JAI-SIN
+$543,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$577,AirAsia,10:10 pm – 9:50 am+1,Economy,1 stop,JAI-SIN
+$523,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$711,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$428,IndiGo,11:50 am – 4:30 am+1,Economy,1 stop,JAI-SIN
+$478,Vistara,7:55 pm – 9:15 am+1,Economy,1 stop,JAI-SIN
+$391,IndiGo,5:25 am – 4:30 am+1,Economy,1 stop,JAI-SIN
+$472,Vistara,6:30 am – 8:20 pm,Economy,1 stop,JAI-SIN
+$476,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$572,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$467,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$489,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$457,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$466,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$522,AirAsia,10:10 pm – 9:50 am+1,Economy,1 stop,JAI-SIN
+$448,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$550,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$500,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$543,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$478,Vistara,7:55 pm – 9:15 am+1,Economy,1 stop,JAI-SIN
+$529,AirAsia,10:10 pm – 10:50 am+1,Economy,1 stop,JAI-SIN
+$594,Air India,5:55 pm – 7:50 am+1,Economy,1 stop,JAI-SIN
+$711,Air India,9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$577,AirAsia,10:10 pm – 9:50 am+1,Economy,1 stop,JAI-SIN
+$523,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$513,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$450,IndiGo,11:50 am – 4:30 am+1,Economy,1 stop,JAI-SIN
+$457,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$555,"Air India Express, Air India",9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$490,IndiGo,8:10 pm – 10:30 am+1,Economy,1 stop,JAI-SIN
+$503,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$500,Thai AirAsia,10:35 pm – 9:35 am+1,Economy,1 stop,JAI-SIN
+$551,"AirAsia, Malaysia Airlines",10:10 pm – 9:05 am+1,Economy,1 stop,JAI-SIN
+$512,IndiGo,2:05 pm – 3:40 am+1,Economy,1 stop,JAI-SIN
+$545,"Air India Express, Air India",9:30 am – 9:45 pm,Economy,1 stop,JAI-SIN
+$513,Vistara,6:30 am – 8:20 pm,Economy,1 stop,JAI-SIN

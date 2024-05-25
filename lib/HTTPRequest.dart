@@ -17,7 +17,7 @@ class _PriceDisplayPageState extends State<PriceDisplayPage> {
   }
 
   Future<void> fetchDataAndDisplayResult() async {
-    var url = Uri.parse('http://127.0.0.1:5000/predict');
+    var url = Uri.parse('http://10.0.2.2:5000/predict');
     // Update with your Flask server URL
     var headers = {'Content-Type': 'application/json'};
     var body = jsonEncode({

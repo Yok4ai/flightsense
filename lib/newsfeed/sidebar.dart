@@ -11,6 +11,7 @@ import 'package:flightsense/UserProfilePage.dart';
 import 'package:flightsense/chat/ChatPage.dart';
 import 'package:flightsense/loginscreen.dart';
 import 'package:flightsense/Map.dart';
+import 'package:flightsense/pricetracker/pricetracker.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key});
@@ -142,6 +143,16 @@ class Sidebar extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginScreen()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.price_check),
+            title: const Text('Price Tracker'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PriceTracker()),
               );
             },
           ),

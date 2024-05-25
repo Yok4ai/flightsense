@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/BookingHistory.dart';
 import 'package:flightsense/GroupChat.dart';
 import 'package:flightsense/Map.dart';
+import 'package:flightsense/PredictPage.dart';
 import 'package:flightsense/ReviewsShow.dart';
 import 'package:flightsense/chat/ChatPage.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
     const Icon(Icons.reviews),
     const Icon(Icons.map),
     const Icon(Icons.people),
+    const Icon(Icons.money),
     const Icon(Icons.logout), // Add settings icon
   ];
 
@@ -118,7 +120,14 @@ class _HomePageState extends State<HomePage> {
               builder: (context) => GroupChatPage()), // Navigate to CSVFlight
         );
         break;
-      case 9:
+        case 9:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => PredictionPage()), // Navigate to CSVFlight
+        );
+        break;
+      case 10:
         FirebaseAuth.instance.signOut();
         Navigator.pushReplacement(
           context,
@@ -316,8 +325,14 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 selected: _selectedIndex == 9,
                 leading: _navigationItems[9],
-                title: const Text('Sign Out'),
+                title: const Text('Price Pediction'),
                 onTap: () => _onItemTapped(9), // Handle settings tap (optional)
+              ),
+              ListTile(
+                selected: _selectedIndex == 10,
+                leading: _navigationItems[10],
+                title: const Text('Sign Out'),
+                onTap: () => _onItemTapped(10), // Handle settings tap (optional)
               ),
             ],
           ),

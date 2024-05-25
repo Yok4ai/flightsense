@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/GroupChat.dart';
+import 'package:flightsense/newsfeed/newsFeed.dart';
 import 'package:flutter/material.dart';
 import 'package:flightsense/RealTimeSearch/realtimeSearch.dart';
 import 'package:flightsense/BookingHistory.dart';
@@ -35,6 +36,16 @@ class Sidebar extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text('Home'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NewsFeed()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: const Text('User Profile'),
             onTap: () {
               Navigator.push(
                 context,

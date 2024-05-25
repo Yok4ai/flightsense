@@ -1,5 +1,5 @@
 //import 'package:flightsense/Map/Map.dart';
-import 'package:flightsense/HTTPRequest.dart';
+import 'package:flightsense/HTTPRequest2.dart';
 import 'package:flightsense/HomePage.dart';
 import 'package:flightsense/PredictPage.dart';
 import 'package:flightsense/firebase_options.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
-      home: PriceDisplayPage(),
+      home: NewsFeed(),
     );
   }
 }

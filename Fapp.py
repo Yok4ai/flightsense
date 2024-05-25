@@ -89,6 +89,8 @@ def predict():
 
     # Make prediction
     result = model.predict(input_features)[0]
+    
+    print(result)
 
     return jsonify({'price': result})
 

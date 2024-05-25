@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class PriceDisplayPage extends StatefulWidget {
+class PriceDisplay extends StatefulWidget {
   @override
-  _PriceDisplayPageState createState() => _PriceDisplayPageState();
+  _PriceDisplayState createState() => _PriceDisplayState();
 }
 
-class _PriceDisplayPageState extends State<PriceDisplayPage> {
+class _PriceDisplayState extends State<PriceDisplay> {
   String priceResult = '';
 
   final airlineController = TextEditingController();
@@ -188,6 +188,6 @@ class _PriceDisplayPageState extends State<PriceDisplayPage> {
 
 void main() {
   runApp(MaterialApp(
-    home: PriceDisplayPage(),
+    home: PriceDisplay(),
   ));
 }

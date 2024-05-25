@@ -5,7 +5,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapSample extends StatefulWidget {
-  const MapSample({super.key});
+  const MapSample({Key? key}) : super(key: key);
 
   @override
   State<MapSample> createState() => MapSampleState();
@@ -26,22 +26,33 @@ class MapSampleState extends State<MapSample> {
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    zoom: 13.4746,
   );
 
   @override
   void initState() {
     super.initState();
 
-    _setMarker(const LatLng(37.42796133580664, -122.085749699962));
+    _setMarkers(LatLng(37.42796133580664, -122.085749699962),
+        LatLng(37.42796133580664, -122.085749699962));
   }
 
-  void _setMarker(LatLng point) {
+  void _setMarkers(LatLng originPoint, LatLng destinationPoint) {
     setState(() {
       _markers.add(
         Marker(
-          markerId: const MarkerId('marker'),
-          position: point,
+          markerId: const MarkerId('origin_marker'),
+          position: originPoint,
+          icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueGreen), // Green marker for origin
+        ),
+      );
+      _markers.add(
+        Marker(
+          markerId: const MarkerId('destination_marker'),
+          position: destinationPoint,
+          icon: BitmapDescriptor.defaultMarkerWithHue(
+              BitmapDescriptor.hueRed), // Red marker for destination
         ),
       );
     });
@@ -68,8 +79,8 @@ class MapSampleState extends State<MapSample> {
     _polylines.add(
       Polyline(
         polylineId: PolylineId(polylineIdVal),
-        width: 2,
-        color: Colors.blue,
+        width: 5,
+        color: Color.fromARGB(255, 47, 33, 243),
         points: points
             .map(
               (point) => LatLng(point.latitude, point.longitude),
@@ -97,7 +108,8 @@ class MapSampleState extends State<MapSample> {
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
                           controller: _originController,
-                          decoration: const InputDecoration(hintText: ' Origin'),
+                          decoration:
+                              const InputDecoration(hintText: ' Origin'),
                           onChanged: (value) {
                             print(value);
                           },
@@ -107,7 +119,8 @@ class MapSampleState extends State<MapSample> {
                         padding: const EdgeInsets.all(8.0),
                         child: TextFormField(
                           controller: _destinationController,
-                          decoration: const InputDecoration(hintText: ' Destination'),
+                          decoration:
+                              const InputDecoration(hintText: ' Destination'),
                           onChanged: (value) {
                             print(value);
                           },
@@ -126,6 +139,8 @@ class MapSampleState extends State<MapSample> {
                       _goToPlace(
                         directions['start_location']['lat'],
                         directions['start_location']['lng'],
+                        directions['end_location']['lat'],
+                        directions['end_location']['lng'],
                         directions['bounds_ne'],
                         directions['bounds_sw'],
                       );
@@ -141,8 +156,7 @@ class MapSampleState extends State<MapSample> {
               ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height *
-                  0.5, // Adjust the height of the map as needed
+              height: MediaQuery.of(context).size.height * 0.5,
               child: GoogleMap(
                 mapType: MapType.normal,
                 markers: _markers,
@@ -163,36 +177,38 @@ class MapSampleState extends State<MapSample> {
           ],
         ),
       ),
-      resizeToAvoidBottomInset:
-          false, // Prevent the map from resizing when the keyboard appears
+      resizeToAvoidBottomInset: false,
     );
   }
 
   Future<void> _goToPlace(
-    // Map<String, dynamic> place,
-    double lat,
-    double lng,
+    double originLat,
+    double originLng,
+    double destLat,
+    double destLng,
     Map<String, dynamic> boundsNe,
     Map<String, dynamic> boundsSw,
   ) async {
-    // final double lat = place['geometry']['location']['lat'];
-    // final double lng = place['geometry']['location']['lng'];
-
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(lat, lng), zoom: 12),
-      ),
+
+    // Set camera position to fit both origin and destination markers
+    LatLngBounds bounds = LatLngBounds(
+      southwest: LatLng(boundsSw['lat'], boundsSw['lng']),
+      northeast: LatLng(boundsNe['lat'], boundsNe['lng']),
+    );
+
+    LatLng center = LatLng(
+      (originLat + destLat) / 2,
+      (originLng + destLng) / 2,
     );
 
     controller.animateCamera(
       CameraUpdate.newLatLngBounds(
-          LatLngBounds(
-            southwest: LatLng(boundsSw['lat'], boundsSw['lng']),
-            northeast: LatLng(boundsNe['lat'], boundsNe['lng']),
-          ),
-          25),
+        bounds,
+        100, // padding value in pixels
+      ),
     );
-    _setMarker(LatLng(lat, lng));
+
+    _setMarkers(LatLng(originLat, originLng), LatLng(destLat, destLng));
   }
 }

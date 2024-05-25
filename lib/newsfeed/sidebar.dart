@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flightsense/GroupChat.dart';
+import 'package:flightsense/HTTPRequest.dart';
 import 'package:flightsense/newsfeed/newsFeed.dart';
 import 'package:flutter/material.dart';
 import 'package:flightsense/RealTimeSearch/realtimeSearch.dart';
@@ -132,6 +133,16 @@ class Sidebar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const PendingPayments()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.money),
+            title: const Text('Price Prediction'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PriceDisplay()),
               );
             },
           ),

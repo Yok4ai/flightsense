@@ -1,3 +1,5 @@
+![App Icon](assets/images/planewhite.png)
+
 # FlightSense: A Travel Companion App
 
 ## Overview
